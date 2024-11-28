@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Req } from '@nestjs/common';
 import { TodosService } from './todos.service';
 
-@Controller('todos')
+@Controller({ path: 'todos', version: '1' })
 export class TodosController {
   constructor(private todosService: TodosService) {}
 
