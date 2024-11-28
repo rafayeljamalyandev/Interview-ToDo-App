@@ -6,7 +6,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 // Added Passport for authentication
 import { PassportModule } from '@nestjs/passport';
 // Added Users module for user management
-import { UsersModule } from 'src/users/users.module';
+import { UsersModule } from '../users/users.module';
 // Added JWT functionality
 import { JwtModule } from '@nestjs/jwt';
 // Added configuration management

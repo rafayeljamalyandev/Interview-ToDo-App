@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common'; // Added NotFoundException for better error handling
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateTodoDto } from './dto/create-todo.dto'; // Added DTO for type-safe input validation
 
 @Injectable()

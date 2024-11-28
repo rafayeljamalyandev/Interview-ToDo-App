@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 // Added JWT authentication guard
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { TodosService } from './todos.service';
 // Added custom decorator for user extraction
-import { currentUser } from 'src/auth/current-user.decorator';
+import { currentUser } from '../auth/current-user.decorator';
 // Added type safety for JWT payload
-import { TokenPayload } from 'src/auth/token-payload.interface';
+import { TokenPayload } from '../auth/token-payload.interface';
 // Added DTO for request validation
 import { CreateTodoDto } from './dto/create-todo.dto';
 
