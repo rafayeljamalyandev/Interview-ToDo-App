@@ -9,7 +9,7 @@ import { ValidateUserDto } from './dto/validate-user.dto';
 import { RegisterDto } from './dto/register.dto';
 import { validate } from 'class-validator';
 import { LoginDto } from './dto/login.dto';
-import { generateToken } from '../../src/utils/jwt.utils';
+import { generateToken } from '../utils/jwt.utils';
 
 @Injectable()
 export class AuthService {

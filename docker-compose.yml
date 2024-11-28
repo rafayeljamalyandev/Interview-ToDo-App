@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  mysql-todoapp:
+    image: mysql:latest
+    container_name: mysql-todoapp
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - '3306:3306'
+    restart: unless-stopped
