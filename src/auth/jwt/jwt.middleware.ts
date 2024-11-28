@@ -18,7 +18,9 @@ export class JwtMiddleware implements NestMiddleware {
     // Skip JWT authentication for '/auth/register' and '/auth/login' routes
     if (
       versionedRegisterRoute.test(req.path) ||
-      versionedLoginRoute.test(req.path)
+      req.path === '/auth/login' ||
+      versionedLoginRoute.test(req.path) ||
+      req.path === '/auth/register'
     ) {
       return next();
     }

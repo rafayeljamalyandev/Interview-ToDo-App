@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
-import { User } from 'src/common/decorators/user.decorator';
+import { User } from '../common/decorators/user.decorator';
 
 @Controller({ path: 'todos', version: '1' })
 export class TodosController {
@@ -31,8 +31,9 @@ export class TodosController {
     @Body('title') title: string,
     @User() req: { userId: number },
   ) {
-    if (!title || title.trim().length === 0)
+    if (!title || title.trim().length === 0) {
       throw new NotFoundException('Title is required');
+    }
     return this.todosService.editTodo(todoId, title, req.userId);
   }
 

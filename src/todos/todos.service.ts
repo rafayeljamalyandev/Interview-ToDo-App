@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -21,16 +25,26 @@ export class TodosService {
     todoId: number,
     updateData: Partial<{ title: string; completed: boolean }>,
   ) {
+    const validTodoId = Number(todoId);
+    if (isNaN(validTodoId) || validTodoId <= 0) {
+      throw new BadRequestException('Invalid Todo ID');
+    }
+
+    const validUserId = Number(userId);
+    if (isNaN(validUserId) || validUserId <= 0) {
+      throw new BadRequestException('Invalid User ID');
+    }
+
     const todo = await this.prisma.todo.findFirst({
-      where: { id: todoId, userId },
+      where: { id: validTodoId, userId: validUserId },
     });
 
     if (!todo) {
-      throw new NotFoundException(`Todo with ID ${todoId} not found`);
+      throw new NotFoundException(`Todo with ID ${validTodoId} not found`);
     }
 
     return this.prisma.todo.update({
-      where: { id: todoId },
+      where: { id: validTodoId },
       data: updateData,
     });
   }
