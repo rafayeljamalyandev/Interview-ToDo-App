@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: todo_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: todoapp
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - todo_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: todo_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: password
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - todo_network
+
+volumes:
+  mysql_data:
+
+networks:
+  todo_network:
+    driver: bridge

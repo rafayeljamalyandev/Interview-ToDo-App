@@ -1,115 +1,120 @@
 # TODO App with NestJS, Prisma, and MySQL
 
-This project is a simple TODO application built with **NestJS**, **Prisma**, and **MySQL**. It includes basic authentication and a TODO management system.
+A simple TODO application built with NestJS, Prisma, and MySQL, featuring authentication and todo management.
 
-## Task for Candidates
+> **Warning**: The `.env` file is included for demonstration **only**. In production, **never commit `.env` files to version control**.
 
-You are tasked with **reviewing, improving, and fixing this codebase**. This application intentionally contains poor practices, missing features, and bugs. Your goal is to refactor and enhance the project while following modern backend development best practices.
+## Prerequisites
 
----
+- Node.js (v16+)
+- Docker
+- npm or yarn
 
-## Requirements
+## Local Development Setup
 
-Your submission must include the following:
+### 1. Environment Configuration
 
-### 1. **Code Improvements**
-- Refactor the codebase to follow clean architecture and modular design principles.
-- Ensure proper error handling (e.g., try-catch blocks, meaningful HTTP response codes).
-- Implement middleware for authentication and JWT validation.
-- Use DTOs and validation pipes for incoming requests.
-- Avoid hardcoded values (e.g., `.env` for sensitive information).
-- Improve database queries to handle edge cases and optimize performance.
-- Add meaningful comments where necessary.
+Create `.env` in project root:
 
-### 2. **Unit and Integration Tests**
-- Write unit tests for critical services (e.g., authentication, TODO management).
-- Write at least one integration test to validate the API behavior end-to-end.
-
-### 3. **Documentation**
-- Create documentation for the APIs using Postman and put the exported collection as json in the `documentation/api` folder.
-- Provide instructions for setting up and running the project locally.
-
-### 4. **Edge Cases**
-- Handle edge cases such as invalid user input, empty TODO lists, invalid authentication tokens, etc.
-
----
-
-## Getting Started
-
-### Prerequisites
-
-Ensure you have the following tools installed:
-- **Node.js** (v16 or higher)
-- **MySQL** (local instance or Docker)
-- **npm** 
-- **Git**
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/rafayeljamalyandev/Interview-ToDo-App.git
-```
-
-2.	Install dependencies:
-```bash
-npm install
-```
-
-3.	Set up the .env file:
-```bash
+```env
+# Database
 DATABASE_URL="mysql://root:password@localhost:3306/todoapp"
-JWT_SECRET="some_secret_key"
+
+# JWT Settings
+JWT_SECRET="your_secure_secret_key"
+JWT_EXPIRATION=10h
+
+# Server
+PORT=3000
 ```
 
-4.	Apply Prisma migrations:
+### 2. Database Setup
+
+Use Docker Compose to initialize the database:
+
+```bash
+# Generate Prisma client
+npx prisma generate
+
+# Start database containers
+docker-compose up -d
+```
+
+This will:
+
+- Start MySQL database
+- Create PhpMyAdmin interface
+- Set up necessary network configurations
+
+### 3. Database Migrations
+
+Apply database migrations:
 
 ```bash
 npx prisma migrate dev
 ```
 
+### 4. Installation & Running
 
-5.	Start the application:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start development server:
+
 ```bash
 npm run start:dev
 ```
 
-## Submission Format
+## API Endpoints
 
-1.	Create a Fork
-•	Fork this repository to your personal GitHub account.
-2.	Create a Feature Branch
-•	Create a new branch for your work:
+### Authentication
+
+- `POST /auth/login`: User login
+- `POST /users`: User registration
+
+### Todos
+
+- `GET /todos`: List todos
+- `POST /todos`: Create todo
+
+## Testing
 
 ```bash
-git checkout -b candidate-improvements
+# Unit tests
+npm run test
+
+# E2E tests
+npm run test:e2e
+
+# Test coverage
+npm run test:cov
 ```
 
-3.	Make Changes
-  •	Commit your improvements and push them to your branch.
-4.	Open a Merge Request (MR)
-  •	Submit a pull request (PR) from your feature branch to the main branch of this repository.
-5.	Provide a Summary
-  •	In your MR description, include:
-  •	A brief overview of the changes.
-  •	Key improvements and fixes.
-  •	Instructions for testing your changes.
+## Documentation
 
-## Evaluation Criteria
+API documentation available in `documentation/api/todo-app.postman_collection.json`
 
-Your submission will be evaluated based on the following:
-1.	Code quality and readability.
-2.	Adherence to best practices.
-3.	Error handling and edge case management.
-4.	Test coverage and quality of tests.
-5.	Proper use of Prisma and database handling.
-6.	Documentation and clarity of instructions.
+### Postman Setup
 
-Tips
-•	Focus on making the code modular and maintainable.
-•	Write meaningful commit messages.
-•	Don’t overcomplicate — aim for clarity and maintainability.
+1. Create new Environment:
 
-Good luck! 🚀
+   - Click "Environments" -> "Create Environment"
+   - Name: "Todo App Local"
+   - Add variable: `baseUrl` = `http://localhost:3000`
+   - Save environment
 
-Let me know if you need further customization for the `README.md` file or assistance!
+2. Import Collection:
+
+   - Import `documentation/api/todo-app.postman_collection.json`
+   - Select "Todo App Local" environment from dropdown (top-right)
+
+3. Test API Flow:
+   - Register: POST {{baseUrl}}/users
+   - Login: POST {{baseUrl}}/auth/login
+   - Create Todo: POST {{baseUrl}}/todos
+   - List Todos: GET {{baseUrl}}/todos
+
+Note: The login endpoint sets cookies automatically for subsequent authenticated requests.

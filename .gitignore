@@ -1,3 +1,8 @@
+# Environment variables
+# Note: .env file is intentionally not ignored to facilitate project setup
+# In a production environment, this should be added to .gitignore
+
+
 # compiled output
 /dist
 /node_modules

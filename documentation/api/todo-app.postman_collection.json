@@ -1,0 +1,100 @@
+{
+  "info": {
+    "_postman_id": "random-uuid",
+    "name": "TODO App API",
+    "description": "API documentation for the NestJS TODO application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"StrongP@ssw0rd123\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"StrongP@ssw0rd123\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Todos",
+      "item": [
+        {
+          "name": "Create Todo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/todos",
+              "host": ["{{baseUrl}}"],
+              "path": ["todos"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My new todo\",\n  \"completed\": false\n}"
+            }
+          }
+        },
+        {
+          "name": "List Todos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/todos",
+              "host": ["{{baseUrl}}"],
+              "path": ["todos"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
