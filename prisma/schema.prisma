@@ -11,11 +11,26 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
+
+  // Add relation to Todo model - one user can have many todos
+  todos Todo[]
+
+
+
+  @@map("users") // Better naming convention for tables
 }
 
 model Todo {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   title     String
-  completed Boolean @default(false)
+  completed Boolean  @default(false)
   userId    Int
+
+  // Add relation to User model - each todo belongs to one user
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+
+
+  @@map("todos") // Better naming convention for tables
+  @@index([userId]) // Add index for better query performance
 }
