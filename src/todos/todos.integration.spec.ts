@@ -70,10 +70,8 @@ describe('TodosController (e2e)', () => {
     expect(response.body.title).toBe(createTodoDto.title);
   });
 
-  // Test forlisting todos
+  // Test for listing todos
   it('should return a list of todos for the user', async () => {
-    const user = await createTestUser();
-
     const response = await request(app.getHttpServer())
       .get('/todos')
       .set('Authorization', `Bearer ${authToken}`)
@@ -130,7 +128,7 @@ describe('TodosController (e2e)', () => {
       .patch(`/todos/${todoId}`)
       .send({ title: '' })
       .set('Authorization', `Bearer ${authToken}`)
-      .expect(404);
+      .expect(400);
 
     expect(response.body.message).toBe('Title is required');
   });

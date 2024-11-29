@@ -6,11 +6,27 @@ import {
   VersioningType,
 } from '@nestjs/common';
 import * as dotenv from 'dotenv';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 dotenv.config();
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
+
+  // Create Swagger configuration
+  const config = new DocumentBuilder()
+    .setTitle('My API')
+    .setDescription('The Interview-ToDo-App API description')
+    .setVersion('1.0')
+    .addServer('/v1', 'Version 1')
+    .addBearerAuth()
+    .build();
+
+  // Generate Swagger document
+  const document = SwaggerModule.createDocument(app, config);
+
+  // Setup Swagger UI
+  SwaggerModule.setup('api-docs', app, document);
 
   app.enableVersioning({
     type: VersioningType.URI,
