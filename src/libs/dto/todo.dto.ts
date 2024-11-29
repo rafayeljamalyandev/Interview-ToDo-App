@@ -3,14 +3,26 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateTodoDto {
-  @ApiProperty()
+  @ApiProperty({ description: 'The title of the TODO item' })
   @IsNotEmpty()
   @IsString()
   title: string;
+}
 
-  @ApiProperty({ default: false })
+export class UpdateTodoDto extends PartialType(CreateTodoDto) {
+  @ApiProperty({
+    description: 'The title of the TODO item',
+    required: false,
+    example: 'Buy groceries',
+  })
+  @IsOptional()
+  @IsString()
+  title?: string;
+
+  @ApiProperty({
+    description: 'The completion status of the TODO item',
+    default: false,
+  })
   @IsOptional()
   completed?: boolean;
 }
-
-export class UpdateTodoDto extends PartialType(CreateTodoDto) {}
