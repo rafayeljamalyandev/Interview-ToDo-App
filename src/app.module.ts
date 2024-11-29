@@ -1,16 +1,20 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from './auth.module';
-import { TodosModule } from './todos.module';
 import { ConfigModule } from '@nestjs/config';
+import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { TodosModule } from './todos/todos.module';
 
 @Module({
   imports: [
-    AuthModule,
-    TodosModule,
     ConfigModule.forRoot({
-      isGlobal: true,
+      isGlobal: true, // Make environment variables available globally
+      envFilePath: '.env',
     }),
+    PrismaModule,
+    AuthModule,
+    UsersModule,
+    TodosModule,
   ],
-  providers: [],
 })
 export class AppModule {}

@@ -8,14 +8,30 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?  // Optional name field
+  todos     Todo[]   // Relation to todos
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users") // Better table naming convention
+  @@index([email]) // Index for faster queries
 }
 
 model Todo {
-  id        Int     @id @default(autoincrement())
-  title     String
-  completed Boolean @default(false)
-  userId    Int
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  description String?  @db.Text // Optional description field
+  completed   Boolean  @default(false)
+  userId      Int      @map("user_id")
+  dueDate     DateTime? @map("due_date") // Optional due date
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("todos")
+  @@index([userId]) // Index for faster queries
+  @@index([completed]) // Index for filtering completed/incomplete todos
 }
