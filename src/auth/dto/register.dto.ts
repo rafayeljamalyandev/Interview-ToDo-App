@@ -7,7 +7,7 @@ export class RegisterDto {
     description:
       'A valid email address for the user, used for login and notifications.',
   })
-  @IsEmail()
+  @IsEmail({}, { message: 'Invalid email address.' })
   email: string;
 
   @ApiProperty({

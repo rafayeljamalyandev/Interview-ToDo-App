@@ -1,11 +1,27 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { Logger } from '@nestjs/common';
+import { BadRequestException, Logger, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const logger = new Logger('Bootstrap'); // Create a logger instance
+
+  // Enable global validation pipe
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true, // Convert payloads to DTO instances
+      whitelist: true, // Get rid of properties that are not in the DTO
+      forbidNonWhitelisted: false, // Throw error if there are extra properties
+      exceptionFactory: (errors) => {
+        const errorMessage =
+          errors[0]?.constraints[Object.keys(errors[0].constraints)[0]];
+
+        return new BadRequestException(errorMessage);
+      },
+      stopAtFirstError: true,
+    }),
+  );
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Task Management API')
