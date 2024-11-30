@@ -8,14 +8,28 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  todos     Todo[]
+
+  @@map("users")
 }
 
 model Todo {
-  id        Int     @id @default(autoincrement())
-  title     String
-  completed Boolean @default(false)
-  userId    Int
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  userId      Int       @map("user_id")
+  user        User      @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  completedAt DateTime? @map("completed_at")
+  dueDate     DateTime? @map("due_date")
+
+  @@index([userId], name: "user_id")
+  @@map("todos")
 }
