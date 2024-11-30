@@ -10,12 +10,13 @@ export class TodoService {
   // Create a new Todo for a user
   async create(createTodoDto: CreateTodoDto, userId: number) {
     try {
-      return await this.prisma.todo.create({
+      const newTodo = await this.prisma.todo.create({
         data: {
           ...createTodoDto,
           userId,
         },
       });
+      return newTodo;
     } catch (error) {
       throw new InternalServerErrorException('Failed to create Todo');
     }
@@ -44,7 +45,6 @@ export class TodoService {
       }
       return todo;
     } catch (error) {
-      console.log(error)
       throw error instanceof ForbiddenException
         ? error
         : new InternalServerErrorException('Failed to fetch the Todo');
@@ -60,7 +60,6 @@ export class TodoService {
         data: updateTodoDto,
       });
     } catch (error) {
-      console.log(error);
       throw error instanceof ForbiddenException
         ? error
         : new InternalServerErrorException('Failed to update the Todo');
@@ -93,7 +92,7 @@ export class TodoService {
         orderBy: { createdAt: 'desc' },
       });
     } catch (error) {
-      console.log(error)
+    
       throw new Error('Error searching for todos');
     }
   }
