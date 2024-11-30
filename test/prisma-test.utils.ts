@@ -1,4 +1,4 @@
-import { PrismaService } from './prisma.service';
+import { PrismaService } from "src/prisma/prisma.service";
 
 export class PrismaTestUtils {
   private prisma: PrismaService;

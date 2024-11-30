@@ -23,7 +23,8 @@ A robust RESTful API built with NestJS, Prisma, and PostgreSQL for managing task
 
 - **NestJS** - Backend framework
 - **Prisma** - ORM
-- **PostgreSQL** - Database
+- **PostgreSQL** - Database (Docker)
+- **MYSQL** - Database (Local)
 - **Swagger** - API documentation
 - **JWT** - Authentication
 - **Class Validator** - Data validation
@@ -268,6 +269,73 @@ Features:
 - `npm run lint` - Run linter
 
 ---
+
+
+# 🚀 Running the Project
+
+### Locally
+
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Set up the environment variables**
+   Copy the example file and update the configuration:
+   ```bash
+   cp .env.example .env
+   ```
+   Example `.env`:
+   ```env
+   DATABASE_URL="postgresql://user:password@localhost:5432/dbname?schema=public"
+   JWT_SECRET="your-super-secret-key"
+   JWT_EXPIRATION="24h"
+   ```
+
+3. **Run Prisma migrations**
+   ```bash
+   npx prisma migrate dev
+   ```
+
+4. **Start the server**
+   ```bash
+   npm run start:dev
+   ```
+
+The server will start on [http://localhost:3000](http://localhost:3000).
+
+---
+
+### With Docker
+
+1. **Ensure Docker and Docker Compose are installed** on your system.
+
+2. **Build and start the services**:
+   ```bash
+   docker-compose up --build
+   ```
+
+3. **Access the application**:
+   - The API will be available at [http://localhost:3000](http://localhost:3000).
+   - PostgreSQL will be running inside the `db` service.
+
+4. **Stop the services**:
+   ```bash
+   docker-compose down
+   ```
+
+The Docker setup includes:
+- A PostgreSQL database (`db` service) with default credentials defined in `docker-compose.yml`.
+- The Node.js application (`api` service) configured with the following `.env` values:
+   ```env
+   DATABASE_URL=postgresql://postgres:password@db:5432/todoapp?schema=public
+   JWT_SECRET=your-super-secret-key
+   JWT_EXPIRATION=24h
+   ```
+
+---
+
+For further details, refer to the main sections above.
 
 ## 🤝 Contributing
 
