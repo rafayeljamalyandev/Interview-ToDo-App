@@ -4,11 +4,17 @@ import { PrismaService } from '../../src/prisma/prisma.service';
 import { TodoController } from '../../src/todos/todos.controller';
 import { TodoService } from '../../src/todos/todos.service';
 import { Request } from 'express';
+import { Prisma,PrismaClient } from '@prisma/client';
 
+const prisma = new PrismaClient();
 
 describe('TodoController', () => {
   let controller: TodoController;
   let service: TodoService;
+
+  beforeAll( async()=>{
+    await prisma.$connect
+  })
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -91,5 +97,10 @@ describe('TodoController', () => {
       
     });
   });
+
+  afterAll(async()=>{
+    await prisma.$disconnect;
+  })
+
 
 });

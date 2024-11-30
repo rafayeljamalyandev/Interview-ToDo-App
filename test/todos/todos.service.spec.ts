@@ -3,10 +3,19 @@ import { PrismaService } from '../../src/prisma/prisma.service';
 import { TodoService } from '../../src/todos/todos.service';
 import { mock } from 'node:test';
 import { ForbiddenException, InternalServerErrorException } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
 
 jest.mock('../../src/prisma/prisma.service'); // Mock PrismaService
 
+
+
+const prisma = new PrismaClient();
+
 describe('TodoService', () => {
+
+  beforeAll(async()=>{
+    prisma.$connect;
+  })
   let service: TodoService;
   let prismaService: PrismaService;
 
@@ -69,7 +78,7 @@ describe('create', () => {
       jest.spyOn(prismaService.todo, 'create').mockResolvedValue(mockTodo);
 
       const result = await service.create(createTodoDto, 1);
-      console.log(result)
+    
       expect(result).toEqual(mockTodo);
       
       expect(prismaService.todo.create).toHaveBeenCalledWith({
@@ -78,5 +87,9 @@ describe('create', () => {
     });
   });
 
+  afterAll(async()=>{
+    await prisma.$disconnect;
+  })
   
+
 });

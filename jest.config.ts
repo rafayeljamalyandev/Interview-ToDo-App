@@ -12,6 +12,8 @@ const config: Config = {
   coverageDirectory: './coverage', 
   coverageProvider: 'v8', 
   moduleDirectories: ['node_modules', 'src'], 
+  clearMocks:true,
+  detectOpenHandles: true,
 };
 
 export default config;
