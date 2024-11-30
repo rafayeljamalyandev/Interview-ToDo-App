@@ -1,0 +1,545 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2024-11-30T01:58:20.310Z",
+    "__export_source": "insomnia.desktop.app:v10.2.0",
+    "resources": [
+        {
+            "_id": "req_65646ba6efef4d70a5aa051f69fdde92",
+            "parentId": "fld_da2ddfcbaa4643acb5c79c05e9371168",
+            "modified": 1732922262902,
+            "created": 1732920421966,
+            "url": "http://localhost:3000/users/me",
+            "name": "USERS GET",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "{\n  \"title\": \"Completar proyecto\",\n  \"description\": \"Terminar el proyecto de NestJS\",\n  \"dueDate\": \"2024-03-20T00:00:00.000Z\"\n}",
+                        "value": "",
+                        "id": "pair_cddadf418502458e997756c507433677",
+                        "disabled": true
+                    }
+                ]
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMjkyMjI0NiwiZXhwIjoxNzMzMDA4NjQ2fQ.tE6sY2z37PwAffxgTQ4NiJ5BfTqR5EzbL58CZVjouD8"
+            },
+            "metaSortKey": -1732920426372,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_da2ddfcbaa4643acb5c79c05e9371168",
+            "parentId": "wrk_2d20fc4baf154f478f604b767b053889",
+            "modified": 1732919741669,
+            "created": 1732919741669,
+            "name": "Users",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1732919741669,
+            "environmentType": "kv",
+            "_type": "request_group"
+        },
+        {
+            "_id": "wrk_2d20fc4baf154f478f604b767b053889",
+            "parentId": null,
+            "modified": 1732919703952,
+            "created": 1732919703952,
+            "name": "NESTJS",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_67adf77b958242ca8832a3cffcd43bee",
+            "parentId": "fld_da2ddfcbaa4643acb5c79c05e9371168",
+            "modified": 1732925849218,
+            "created": 1732920522543,
+            "url": "http://localhost:3000/users/me/stats",
+            "name": "USERS GET STATS",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "{\n  \"title\": \"Completar proyecto\",\n  \"description\": \"Terminar el proyecto de NestJS\",\n  \"dueDate\": \"2024-03-20T00:00:00.000Z\"\n}",
+                        "value": "",
+                        "id": "pair_cddadf418502458e997756c507433677",
+                        "disabled": true
+                    }
+                ]
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMjkyNTYwNSwiZXhwIjoxNzMzMDEyMDA1fQ.qS6m5dOKRt747KFHgQDHxCqOvW0ikl6adZvdSh5jkPM"
+            },
+            "metaSortKey": -1732920332927.25,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_44725791e2b24caa9a4e30098fb97a1d",
+            "parentId": "fld_da2ddfcbaa4643acb5c79c05e9371168",
+            "modified": 1732922298768,
+            "created": 1732920477853,
+            "url": "http://localhost:3000/users/me",
+            "name": "USERS update",
+            "description": "",
+            "method": "PATCH",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n  \"name\": \"Nuevo Nombre 2\",\n  \"email\": \"nuevo2@email.com\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMjkyMjI0NiwiZXhwIjoxNzMzMDA4NjQ2fQ.tE6sY2z37PwAffxgTQ4NiJ5BfTqR5EzbL58CZVjouD8"
+            },
+            "metaSortKey": -1732920239482.5,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_eba69b9a016c435eb03e207140876df3",
+            "parentId": "fld_c6a5784003a84f22b9c4aac5db434e49",
+            "modified": 1732925718086,
+            "created": 1732919983018,
+            "url": "http://localhost:3000/todos",
+            "name": "POST",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n  \"title\": \"Nuevo Todo de Prueba\",\n  \"description\": \"Descripción de prueba\",\n  \"dueDate\": \"2024-12-31T00:00:00.000Z\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMjkyNTYwNSwiZXhwIjoxNzMzMDEyMDA1fQ.qS6m5dOKRt747KFHgQDHxCqOvW0ikl6adZvdSh5jkPM"
+            },
+            "metaSortKey": -1732920052593,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_c6a5784003a84f22b9c4aac5db434e49",
+            "parentId": "wrk_2d20fc4baf154f478f604b767b053889",
+            "modified": 1732919735160,
+            "created": 1732919735160,
+            "name": "Todos",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1732919735160,
+            "environmentType": "kv",
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_444e1b56980c425aa599c5f99e873084",
+            "parentId": "fld_c6a5784003a84f22b9c4aac5db434e49",
+            "modified": 1732925802999,
+            "created": 1732920139318,
+            "url": "http://localhost:3000/todos/1",
+            "name": "UPDATE",
+            "description": "",
+            "method": "PATCH",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n  \"title\": \"Título actualizado\",\n  \"completed\": true\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMjkyNTYwNSwiZXhwIjoxNzMzMDEyMDA1fQ.qS6m5dOKRt747KFHgQDHxCqOvW0ikl6adZvdSh5jkPM"
+            },
+            "metaSortKey": -1732920015776.5,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_fea88da629eb4de9901a7fbc6e515308",
+            "parentId": "fld_c6a5784003a84f22b9c4aac5db434e49",
+            "modified": 1732925767243,
+            "created": 1732920066289,
+            "url": "http://localhost:3000/todos",
+            "name": "TODOS GET",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "{\n  \"title\": \"Completar proyecto\",\n  \"description\": \"Terminar el proyecto de NestJS\",\n  \"dueDate\": \"2024-03-20T00:00:00.000Z\"\n}",
+                        "value": "",
+                        "id": "pair_cddadf418502458e997756c507433677",
+                        "disabled": true
+                    }
+                ]
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMjkyNTYwNSwiZXhwIjoxNzMzMDEyMDA1fQ.qS6m5dOKRt747KFHgQDHxCqOvW0ikl6adZvdSh5jkPM"
+            },
+            "metaSortKey": -1732919978960,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_b6cd657781dd47d8866b1bd2d98101a9",
+            "parentId": "fld_c6a5784003a84f22b9c4aac5db434e49",
+            "modified": 1732925783822,
+            "created": 1732920104661,
+            "url": "http://localhost:3000/todos/1",
+            "name": "TODOS GET 1",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "{\n  \"title\": \"Completar proyecto\",\n  \"description\": \"Terminar el proyecto de NestJS\",\n  \"dueDate\": \"2024-03-20T00:00:00.000Z\"\n}",
+                        "value": "",
+                        "id": "pair_cddadf418502458e997756c507433677",
+                        "disabled": true
+                    }
+                ]
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMjkyNTYwNSwiZXhwIjoxNzMzMDEyMDA1fQ.qS6m5dOKRt747KFHgQDHxCqOvW0ikl6adZvdSh5jkPM"
+            },
+            "metaSortKey": -1732919942143.5,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_a603a26bca08440b8b93f7c97751eb12",
+            "parentId": "fld_c6a5784003a84f22b9c4aac5db434e49",
+            "modified": 1732925794427,
+            "created": 1732922861312,
+            "url": "http://localhost:3000/todos/stats/summary",
+            "name": "TODOS UPDATE",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "{\n  \"title\": \"Completar proyecto\",\n  \"description\": \"Terminar el proyecto de NestJS\",\n  \"dueDate\": \"2024-03-20T00:00:00.000Z\"\n}",
+                        "value": "",
+                        "id": "pair_cddadf418502458e997756c507433677",
+                        "disabled": true
+                    }
+                ]
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMjkyNTYwNSwiZXhwIjoxNzMzMDEyMDA1fQ.qS6m5dOKRt747KFHgQDHxCqOvW0ikl6adZvdSh5jkPM"
+            },
+            "metaSortKey": -1732919932939.375,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_34bb5706af1d4fd0b4a98d6e47dce604",
+            "parentId": "fld_c6a5784003a84f22b9c4aac5db434e49",
+            "modified": 1732925837420,
+            "created": 1732920267478,
+            "url": "http://localhost:3000/todos/2",
+            "name": "TODOS DELETE 1",
+            "description": "",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "multipart/form-data",
+                "params": [
+                    {
+                        "name": "{\n  \"title\": \"Completar proyecto\",\n  \"description\": \"Terminar el proyecto de NestJS\",\n  \"dueDate\": \"2024-03-20T00:00:00.000Z\"\n}",
+                        "value": "",
+                        "id": "pair_cddadf418502458e997756c507433677",
+                        "disabled": true
+                    }
+                ]
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMjkyNTYwNSwiZXhwIjoxNzMzMDEyMDA1fQ.qS6m5dOKRt747KFHgQDHxCqOvW0ikl6adZvdSh5jkPM"
+            },
+            "metaSortKey": -1732919923735.25,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_7588164e90c44ad8aab9b6144180e376",
+            "parentId": "fld_5e6682074668404b97323301c8f58111",
+            "modified": 1732922225243,
+            "created": 1732919911085,
+            "url": "http://localhost:3000/auth/login",
+            "name": "Login",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1732919905327,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_5e6682074668404b97323301c8f58111",
+            "parentId": "wrk_2d20fc4baf154f478f604b767b053889",
+            "modified": 1732919725844,
+            "created": 1732919725844,
+            "name": "AUTH",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1732919725844,
+            "environmentType": "kv",
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_80e757dac2a340588b5dca9c589edf21",
+            "parentId": "fld_5e6682074668404b97323301c8f58111",
+            "modified": 1732922240379,
+            "created": 1732919714042,
+            "url": "http://localhost:3000/auth/register",
+            "name": "Register",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"name\": \"Test User\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.2.0"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1732919905227,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_b9027dfea540dca2275e232250d171da50c4dc86",
+            "parentId": "wrk_2d20fc4baf154f478f604b767b053889",
+            "modified": 1732919703953,
+            "created": 1732919703953,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1732919703954,
+            "environmentType": "kv",
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_b9027dfea540dca2275e232250d171da50c4dc86",
+            "parentId": "wrk_2d20fc4baf154f478f604b767b053889",
+            "modified": 1732919703956,
+            "created": 1732919703956,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        }
+    ]
+}
