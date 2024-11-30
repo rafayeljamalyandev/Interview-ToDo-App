@@ -9,7 +9,8 @@ async function bootstrap() {
     .setTitle('Todo API')
     .setDescription('The Todo API description')
     .setVersion('1.0')
-    .addBearerAuth(  // Añade esta configuración
+    .addBearerAuth(
+      // Añade esta configuración
       {
         type: 'http',
         scheme: 'bearer',

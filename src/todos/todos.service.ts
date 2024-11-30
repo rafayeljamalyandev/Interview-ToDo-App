@@ -1,9 +1,9 @@
-import { 
-  Injectable, 
-  NotFoundException, 
+import {
+  Injectable,
+  NotFoundException,
   BadRequestException,
   ConflictException,
-  Logger 
+  Logger,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
@@ -20,19 +20,21 @@ export class TodosService {
     try {
       // Check todo limit
       const todoCount = await this.prisma.todo.count({
-        where: { userId }
+        where: { userId },
       });
 
       if (todoCount >= this.MAX_TODOS) {
-        throw new ConflictException(`You have reached the maximum limit of ${this.MAX_TODOS} todos`);
+        throw new ConflictException(
+          `You have reached the maximum limit of ${this.MAX_TODOS} todos`,
+        );
       }
 
       // Check duplicate title
       const existingTodo = await this.prisma.todo.findFirst({
         where: {
           userId,
-          title: createTodoDto.title
-        }
+          title: createTodoDto.title,
+        },
       });
 
       if (existingTodo) {
@@ -67,22 +69,25 @@ export class TodosService {
     }
   }
 
-  async findAll(userId: number, params: { 
-    completed?: boolean; 
-    search?: string;
-    page?: number;
-    limit?: number;
-    sortBy?: 'createdAt' | 'dueDate' | 'title';
-    sortOrder?: 'asc' | 'desc';
-  } = {}) {
+  async findAll(
+    userId: number,
+    params: {
+      completed?: boolean;
+      search?: string;
+      page?: number;
+      limit?: number;
+      sortBy?: 'createdAt' | 'dueDate' | 'title';
+      sortOrder?: 'asc' | 'desc';
+    } = {},
+  ) {
     try {
-      const { 
-        completed, 
-        search, 
-        page = 1, 
+      const {
+        completed,
+        search,
+        page = 1,
         limit = 10,
         sortBy = 'createdAt',
-        sortOrder = 'desc'
+        sortOrder = 'desc',
       } = params;
 
       const skip = (page - 1) * limit;
@@ -113,7 +118,7 @@ export class TodosService {
             },
           },
         }),
-        this.prisma.todo.count({ where })
+        this.prisma.todo.count({ where }),
       ]);
 
       const totalPages = Math.ceil(total / limit);
@@ -127,10 +132,13 @@ export class TodosService {
           totalPages,
           hasNextPage: page < totalPages,
           hasPreviousPage: page > 1,
-        }
+        },
       };
     } catch (error) {
-      this.logger.error(`Error fetching todos for user ${userId}:`, error.stack);
+      this.logger.error(
+        `Error fetching todos for user ${userId}:`,
+        error.stack,
+      );
       throw error;
     }
   }
@@ -155,7 +163,7 @@ export class TodosService {
 
       if (!todo) {
         throw new NotFoundException(
-          `Todo with ID ${id} not found or you don't have access to it`
+          `Todo with ID ${id} not found or you don't have access to it`,
         );
       }
 
@@ -163,8 +171,9 @@ export class TodosService {
       if (todo.dueDate) {
         const now = new Date();
         const dueDate = new Date(todo.dueDate);
-        const hoursUntilDue = (dueDate.getTime() - now.getTime()) / (1000 * 60 * 60);
-        
+        const hoursUntilDue =
+          (dueDate.getTime() - now.getTime()) / (1000 * 60 * 60);
+
         if (hoursUntilDue <= 24 && hoursUntilDue > 0 && !todo.completed) {
           todo['dueSoon'] = true;
           todo['hoursRemaining'] = Math.round(hoursUntilDue);
@@ -174,8 +183,8 @@ export class TodosService {
       return todo;
     } catch (error) {
       this.logger.error(
-        `Error fetching todo ${id} for user ${userId}:`, 
-        error.stack
+        `Error fetching todo ${id} for user ${userId}:`,
+        error.stack,
       );
       throw error;
     }
@@ -221,8 +230,8 @@ export class TodosService {
       });
     } catch (error) {
       this.logger.error(
-        `Error updating todo ${id} for user ${userId}:`, 
-        error.stack
+        `Error updating todo ${id} for user ${userId}:`,
+        error.stack,
       );
       throw error;
     }
@@ -237,8 +246,8 @@ export class TodosService {
       });
     } catch (error) {
       this.logger.error(
-        `Error deleting todo ${id} for user ${userId}:`, 
-        error.stack
+        `Error deleting todo ${id} for user ${userId}:`,
+        error.stack,
       );
       throw error;
     }
@@ -247,13 +256,13 @@ export class TodosService {
   async getStats(userId: number) {
     try {
       const [totalTodos, completedTodos, dueSoonTodos] = await Promise.all([
-        this.prisma.todo.count({ 
-          where: { userId } 
+        this.prisma.todo.count({
+          where: { userId },
         }),
         this.prisma.todo.count({
-          where: { 
-            userId, 
-            completed: true 
+          where: {
+            userId,
+            completed: true,
           },
         }),
         this.prisma.todo.count({
@@ -269,9 +278,8 @@ export class TodosService {
       ]);
 
       const pendingTodos = totalTodos - completedTodos;
-      const completionRate = totalTodos > 0 
-        ? Math.round((completedTodos / totalTodos) * 100)
-        : 0;
+      const completionRate =
+        totalTodos > 0 ? Math.round((completedTodos / totalTodos) * 100) : 0;
 
       return {
         total: totalTodos,
@@ -292,8 +300,8 @@ export class TodosService {
 
       return await this.prisma.todo.update({
         where: { id },
-        data: { 
-          completed: true
+        data: {
+          completed: true,
           // Temporalmente removemos completedAt hasta que Prisma lo reconozca
         },
         include: {
@@ -307,8 +315,8 @@ export class TodosService {
       });
     } catch (error) {
       this.logger.error(
-        `Error marking todo ${id} as completed for user ${userId}:`, 
-        error.stack
+        `Error marking todo ${id} as completed for user ${userId}:`,
+        error.stack,
       );
       throw error;
     }
@@ -338,7 +346,10 @@ export class TodosService {
         },
       });
     } catch (error) {
-      this.logger.error(`Error getting due soon todos for user ${userId}:`, error.stack);
+      this.logger.error(
+        `Error getting due soon todos for user ${userId}:`,
+        error.stack,
+      );
       throw error;
     }
   }

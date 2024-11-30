@@ -7,7 +7,10 @@ import {
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+export class PrismaService
+  extends PrismaClient
+  implements OnModuleInit, OnModuleDestroy
+{
   private readonly logger = new Logger(PrismaService.name);
 
   constructor() {
@@ -49,7 +52,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
       // Delete todos first due to foreign key constraints
       await this.todo.deleteMany();
       await this.user.deleteMany();
-      
+
       this.logger.log('Database cleaned successfully');
     } catch (error) {
       this.logger.error('Error cleaning database:', error.stack);

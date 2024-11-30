@@ -27,4 +27,4 @@ export class TodoDto {
 
   @ApiProperty({ example: 1 })
   userId: number;
-} 
+}

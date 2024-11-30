@@ -25,7 +25,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { GetUser } from '../common/decorators/get-user.decorator';
 
 @ApiTags('Todos')
-@ApiBearerAuth('JWT-auth')  // Añade esto
+@ApiBearerAuth('JWT-auth') // Añade esto
 @UseGuards(JwtAuthGuard)
 @Controller('todos')
 export class TodosController {
@@ -33,8 +33,8 @@ export class TodosController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new todo' })
-  @ApiResponse({ 
-    status: 201, 
+  @ApiResponse({
+    status: 201,
     description: 'Todo successfully created',
     schema: {
       example: {
@@ -44,9 +44,9 @@ export class TodosController {
         completed: false,
         dueDate: '2024-03-20T00:00:00.000Z',
         createdAt: '2024-03-15T00:00:00.000Z',
-        updatedAt: '2024-03-15T00:00:00.000Z'
-      }
-    }
+        updatedAt: '2024-03-15T00:00:00.000Z',
+      },
+    },
   })
   @ApiResponse({ status: 400, description: 'Bad request' })
   create(@GetUser() user: any, @Body() createTodoDto: CreateTodoDto) {
@@ -57,20 +57,22 @@ export class TodosController {
   @ApiOperation({ summary: 'Get all todos' })
   @ApiQuery({ name: 'completed', required: false, type: Boolean })
   @ApiQuery({ name: 'search', required: false, type: String })
-  @ApiResponse({ 
+  @ApiResponse({
     status: 200,
     description: 'Returns all todos',
     schema: {
-      example: [{
-        id: 1,
-        title: 'Complete Project',
-        description: 'Finish the documentation',
-        completed: false,
-        dueDate: '2024-03-20T00:00:00.000Z',
-        createdAt: '2024-03-15T00:00:00.000Z',
-        updatedAt: '2024-03-15T00:00:00.000Z'
-      }]
-    }
+      example: [
+        {
+          id: 1,
+          title: 'Complete Project',
+          description: 'Finish the documentation',
+          completed: false,
+          dueDate: '2024-03-20T00:00:00.000Z',
+          createdAt: '2024-03-15T00:00:00.000Z',
+          updatedAt: '2024-03-15T00:00:00.000Z',
+        },
+      ],
+    },
   })
   findAll(
     @GetUser() user: any,
@@ -83,7 +85,7 @@ export class TodosController {
   @Get(':id')
   @ApiOperation({ summary: 'Get a todo by id' })
   @ApiParam({ name: 'id', description: 'Todo ID' })
-  @ApiResponse({ 
+  @ApiResponse({
     status: 200,
     description: 'Returns a todo',
     schema: {
@@ -94,22 +96,19 @@ export class TodosController {
         completed: false,
         dueDate: '2024-03-20T00:00:00.000Z',
         createdAt: '2024-03-15T00:00:00.000Z',
-        updatedAt: '2024-03-15T00:00:00.000Z'
-      }
-    }
+        updatedAt: '2024-03-15T00:00:00.000Z',
+      },
+    },
   })
   @ApiResponse({ status: 404, description: 'Todo not found' })
-  findOne(
-    @GetUser() user: any,
-    @Param('id', ParseIntPipe) id: number,
-  ) {
+  findOne(@GetUser() user: any, @Param('id', ParseIntPipe) id: number) {
     return this.todosService.findOne(user.id, id);
   }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update a todo' })
   @ApiParam({ name: 'id', description: 'Todo ID' })
-  @ApiResponse({ 
+  @ApiResponse({
     status: 200,
     description: 'Todo successfully updated',
     schema: {
@@ -120,9 +119,9 @@ export class TodosController {
         completed: true,
         dueDate: '2024-03-20T00:00:00.000Z',
         createdAt: '2024-03-15T00:00:00.000Z',
-        updatedAt: '2024-03-15T00:00:00.000Z'
-      }
-    }
+        updatedAt: '2024-03-15T00:00:00.000Z',
+      },
+    },
   })
   @ApiResponse({ status: 404, description: 'Todo not found' })
   update(
@@ -138,10 +137,7 @@ export class TodosController {
   @ApiParam({ name: 'id', description: 'Todo ID' })
   @ApiResponse({ status: 200, description: 'Todo successfully deleted' })
   @ApiResponse({ status: 404, description: 'Todo not found' })
-  remove(
-    @GetUser() user: any,
-    @Param('id', ParseIntPipe) id: number,
-  ) {
+  remove(@GetUser() user: any, @Param('id', ParseIntPipe) id: number) {
     return this.todosService.remove(user.id, id);
   }
 
@@ -155,9 +151,9 @@ export class TodosController {
         total: 10,
         completed: 5,
         pending: 5,
-        completionRate: 50
-      }
-    }
+        completionRate: 50,
+      },
+    },
   })
   getStats(@GetUser() user: any) {
     return this.todosService.getStats(user.id);

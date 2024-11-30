@@ -60,16 +60,22 @@ describe('TodosService', () => {
       mockPrismaService.todo.findUnique.mockResolvedValue(null);
       mockPrismaService.todo.create.mockResolvedValue(expectedTodo);
 
-      const result = await service.create(userId, { ...createTodoDto, dueDate: createTodoDto.dueDate.toISOString() });
+      const result = await service.create(userId, {
+        ...createTodoDto,
+        dueDate: createTodoDto.dueDate.toISOString(),
+      });
       expect(result).toEqual(expectedTodo);
     });
 
     it('should throw ConflictException when todo limit is reached', async () => {
       mockPrismaService.todo.count.mockResolvedValue(100);
 
-      await expect(service.create(userId, { ...createTodoDto, dueDate: createTodoDto.dueDate.toISOString() }))
-        .rejects
-        .toThrow(ConflictException);
+      await expect(
+        service.create(userId, {
+          ...createTodoDto,
+          dueDate: createTodoDto.dueDate.toISOString(),
+        }),
+      ).rejects.toThrow(ConflictException);
     });
   });
 
@@ -100,7 +106,7 @@ describe('TodosService', () => {
     });
 
     it('should filter todos by completed status', async () => {
-      const completedTodos = mockTodos.filter(todo => todo.completed);
+      const completedTodos = mockTodos.filter((todo) => todo.completed);
       mockPrismaService.todo.findMany.mockResolvedValue(completedTodos);
       mockPrismaService.todo.count.mockResolvedValue(1);
 
@@ -130,9 +136,9 @@ describe('TodosService', () => {
     it('should throw NotFoundException if todo does not exist', async () => {
       mockPrismaService.todo.findUnique.mockResolvedValue(null);
 
-      await expect(service.findOne(userId, todoId))
-        .rejects
-        .toThrow(NotFoundException);
+      await expect(service.findOne(userId, todoId)).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -156,4 +162,4 @@ describe('TodosService', () => {
       });
     });
   });
-}); 
+});

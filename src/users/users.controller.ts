@@ -20,7 +20,7 @@ export class UsersController {
 
   @Get('me')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('JWT-auth')  // Añade esto
+  @ApiBearerAuth('JWT-auth') // Añade esto
   getProfile(@GetUser() user: any) {
     return this.usersService.getProfile(user.id);
   }
@@ -28,14 +28,14 @@ export class UsersController {
   @Patch('me')
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
-  @ApiBearerAuth('JWT-auth')  // Añade esto
+  @ApiBearerAuth('JWT-auth') // Añade esto
   updateProfile(@GetUser() user: any, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.updateProfile(user.id, updateUserDto);
   }
 
   @Get('me/stats')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('JWT-auth')  // Añade esto
+  @ApiBearerAuth('JWT-auth') // Añade esto
   getTodoStats(@GetUser() user: any) {
     return this.usersService.getTodoStats(user.id);
   }

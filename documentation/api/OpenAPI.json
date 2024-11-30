@@ -1,0 +1,773 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "NESTJS",
+    "description": "",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/users/me": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "USERS GET",
+        "description": "",
+        "operationId": "USERSGET",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "multipart/form-data"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "USERS update",
+        "description": "",
+        "operationId": "USERSupdate",
+        "parameters": [
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/USERSupdateRequest"
+                  },
+                  {
+                    "example": {
+                      "name": "Nuevo Nombre 2",
+                      "email": "nuevo2@email.com"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "name": "Nuevo Nombre 2",
+                "email": "nuevo2@email.com"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/users/me/stats": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "USERS GET STATS",
+        "description": "",
+        "operationId": "USERSGETSTATS",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "multipart/form-data"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/todos": {
+      "post": {
+        "tags": [
+          "Todos"
+        ],
+        "summary": "POST",
+        "description": "",
+        "operationId": "POST",
+        "parameters": [
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/POSTRequest"
+                  },
+                  {
+                    "example": {
+                      "title": "Nuevo Todo de Prueba",
+                      "description": "Descripción de prueba",
+                      "dueDate": "2024-12-31T00:00:00.000Z"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "title": "Nuevo Todo de Prueba",
+                "description": "Descripción de prueba",
+                "dueDate": "2024-12-31T00:00:00.000Z"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Todos"
+        ],
+        "summary": "TODOS GET",
+        "description": "",
+        "operationId": "TODOSGET",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "multipart/form-data"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/todos/1": {
+      "patch": {
+        "tags": [
+          "Todos"
+        ],
+        "summary": "UPDATE",
+        "description": "",
+        "operationId": "UPDATE",
+        "parameters": [
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/UPDATERequest"
+                  },
+                  {
+                    "example": {
+                      "title": "Título actualizado",
+                      "completed": true
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "title": "Título actualizado",
+                "completed": true
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Todos"
+        ],
+        "summary": "TODOS GET 1",
+        "description": "",
+        "operationId": "TODOSGET1",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "multipart/form-data"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/todos/stats/summary": {
+      "get": {
+        "tags": [
+          "Todos"
+        ],
+        "summary": "TODOS UPDATE",
+        "description": "",
+        "operationId": "TODOSUPDATE",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "multipart/form-data"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/todos/2": {
+      "delete": {
+        "tags": [
+          "Todos"
+        ],
+        "summary": "TODOS DELETE 1",
+        "description": "",
+        "operationId": "TODOSDELETE1",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "multipart/form-data"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "AUTH"
+        ],
+        "summary": "Login",
+        "description": "",
+        "operationId": "Login",
+        "parameters": [
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/LoginRequest"
+                  },
+                  {
+                    "example": {
+                      "email": "test@example.com",
+                      "password": "password123"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "email": "test@example.com",
+                "password": "password123"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "AUTH"
+        ],
+        "summary": "Register",
+        "description": "",
+        "operationId": "Register",
+        "parameters": [
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "insomnia/10.2.0"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/RegisterRequest"
+                  },
+                  {
+                    "example": {
+                      "email": "test@example.com",
+                      "password": "password123",
+                      "name": "Test User"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "email": "test@example.com",
+                "password": "password123",
+                "name": "Test User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "USERSupdateRequest": {
+        "title": "USERSupdateRequest",
+        "required": [
+          "name",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "Nuevo Nombre 2",
+          "email": "nuevo2@email.com"
+        }
+      },
+      "POSTRequest": {
+        "title": "POSTRequest",
+        "required": [
+          "title",
+          "description",
+          "dueDate"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "title": "Nuevo Todo de Prueba",
+          "description": "Descripción de prueba",
+          "dueDate": "2024-12-31T00:00:00.000Z"
+        }
+      },
+      "UPDATERequest": {
+        "title": "UPDATERequest",
+        "required": [
+          "title",
+          "completed"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean"
+          }
+        },
+        "example": {
+          "title": "Título actualizado",
+          "completed": true
+        }
+      },
+      "LoginRequest": {
+        "title": "LoginRequest",
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "test@example.com",
+          "password": "password123"
+        }
+      },
+      "RegisterRequest": {
+        "title": "RegisterRequest",
+        "required": [
+          "email",
+          "password",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "test@example.com",
+          "password": "password123",
+          "name": "Test User"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [],
+  "tags": [
+    {
+      "name": "Users",
+      "description": ""
+    },
+    {
+      "name": "Todos",
+      "description": ""
+    },
+    {
+      "name": "AUTH",
+      "description": ""
+    }
+  ]
+}

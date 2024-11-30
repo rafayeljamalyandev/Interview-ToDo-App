@@ -18,7 +18,7 @@ describe('TodosController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     app.useGlobalPipes(new ValidationPipe());
-    
+
     prisma = app.get<PrismaService>(PrismaService);
     authService = app.get<AuthService>(AuthService);
 
@@ -109,4 +109,4 @@ describe('TodosController (e2e)', () => {
         });
     });
   });
-}); 
+});

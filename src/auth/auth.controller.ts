@@ -1,20 +1,20 @@
-import { 
-  Controller, 
-  Post, 
-  Body, 
-  HttpCode, 
+import {
+  Controller,
+  Post,
+  Body,
+  HttpCode,
   HttpStatus,
   UseGuards,
-  Get 
+  Get,
 } from '@nestjs/common';
-import { 
-  ApiTags, 
-  ApiOperation, 
-  ApiResponse, 
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
   ApiBody,
   ApiBearerAuth,
   ApiExtraModels,
-  getSchemaPath 
+  getSchemaPath,
 } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -29,19 +29,19 @@ export class AuthController {
 
   @Post('register')
   @ApiOperation({ summary: 'Register a new user' })
-  @ApiResponse({ 
-    status: 201, 
+  @ApiResponse({
+    status: 201,
     description: 'User successfully registered',
     schema: {
       example: {
         user: {
           id: 1,
           email: 'user@example.com',
-          name: 'John Doe'
+          name: 'John Doe',
         },
-        token: 'eyJhbGciOiJIUzI1NiIs...'
-      }
-    }
+        token: 'eyJhbGciOiJIUzI1NiIs...',
+      },
+    },
   })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 409, description: 'Email already exists' })
@@ -52,10 +52,10 @@ export class AuthController {
         value: {
           email: 'user@example.com',
           password: 'password123',
-          name: 'John Doe'
-        }
-      }
-    }
+          name: 'John Doe',
+        },
+      },
+    },
   })
   async register(@Body() registerDto: RegisterDto) {
     return this.authService.register(registerDto);
@@ -64,19 +64,19 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Login user' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'User successfully logged in',
     schema: {
       example: {
         user: {
           id: 1,
           email: 'user@example.com',
-          name: 'John Doe'
+          name: 'John Doe',
         },
-        token: 'eyJhbGciOiJIUzI1NiIs...'
-      }
-    }
+        token: 'eyJhbGciOiJIUzI1NiIs...',
+      },
+    },
   })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
   @ApiBody({
@@ -85,10 +85,10 @@ export class AuthController {
       validLogin: {
         value: {
           email: 'user@example.com',
-          password: 'password123'
-        }
-      }
-    }
+          password: 'password123',
+        },
+      },
+    },
   })
   async login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
@@ -96,9 +96,9 @@ export class AuthController {
 
   @Get('profile')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('JWT-auth')  // Añade esto
+  @ApiBearerAuth('JWT-auth') // Añade esto
   @ApiOperation({ summary: 'Get current user profile' })
-  @ApiResponse({ 
+  @ApiResponse({
     status: 200,
     description: 'Returns the current user profile',
     schema: {
@@ -106,9 +106,9 @@ export class AuthController {
         id: 1,
         email: 'user@example.com',
         name: 'John Doe',
-        createdAt: '2024-03-15T00:00:00.000Z'
-      }
-    }
+        createdAt: '2024-03-15T00:00:00.000Z',
+      },
+    },
   })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async getProfile(@GetUser() user: any) {

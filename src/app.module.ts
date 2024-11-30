@@ -9,11 +9,13 @@ import { TodosModule } from './todos/todos.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    ThrottlerModule.forRoot([{
-      name: 'short',
-      ttl: 60000, // 1 minute
-      limit: 10, // 10 requests per minute
-    }]),
+    ThrottlerModule.forRoot([
+      {
+        name: 'short',
+        ttl: 60000, // 1 minute
+        limit: 10, // 10 requests per minute
+      },
+    ]),
     PrismaModule,
     AuthModule,
     UsersModule,

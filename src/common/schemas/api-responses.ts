@@ -8,8 +8,8 @@ export class TokenResponse {
     example: {
       id: 1,
       email: 'user@example.com',
-      name: 'John Doe'
-    }
+      name: 'John Doe',
+    },
   })
   user: any;
 }
@@ -46,4 +46,4 @@ export class ErrorResponse {
 
   @ApiProperty({ example: 'Email already exists' })
   message: string;
-} 
+}

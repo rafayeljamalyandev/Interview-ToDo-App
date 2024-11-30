@@ -56,7 +56,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     // Log the error
     this.logger.error(
       `${request.method} ${request.url}`,
-      exception instanceof Error ? exception.stack : 'Unknown error'
+      exception instanceof Error ? exception.stack : 'Unknown error',
     );
 
     response.status(status).json({
@@ -67,4 +67,4 @@ export class AllExceptionsFilter implements ExceptionFilter {
       error,
     });
   }
-} 
+}

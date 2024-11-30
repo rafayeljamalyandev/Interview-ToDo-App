@@ -1,0 +1,631 @@
+{
+  "info": {
+    "name": "NESTJS",
+    "_postman_id": "8ec24e0b-726f-43d8-9afc-b7b03dd4b92c",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "description": "",
+      "item": [
+        {
+          "id": "a4c54c87-45e1-4d16-a72f-265e5ec7b74f",
+          "name": "USERS GET",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "users/me"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "51a82286-5a1f-4be6-99fa-498671ade56f"
+            }
+          ]
+        },
+        {
+          "id": "455add02-3e6f-4ca0-89ef-438aa5ef97db",
+          "name": "USERS GET STATS",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "users/me/stats"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "bae682dc-686b-4f89-b4a0-e71521c04c41"
+            }
+          ]
+        },
+        {
+          "id": "98a99904-935a-4c97-911f-d79a2ae4f0ac",
+          "name": "USERS update",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "users/me"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Nuevo Nombre 2\",\r\n  \"email\": \"nuevo2@email.com\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "1c5d761a-18cb-41af-9ceb-562ff680ad20"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Todos",
+      "description": "",
+      "item": [
+        {
+          "id": "d3011b15-4d5c-49fb-be24-6fdd55dfd71c",
+          "name": "POST",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "todos"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Nuevo Todo de Prueba\",\r\n  \"description\": \"Descripción de prueba\",\r\n  \"dueDate\": \"2024-12-31T00:00:00.000Z\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "6881e048-99d5-4837-af20-861ed57b0e35"
+            }
+          ]
+        },
+        {
+          "id": "98e551bd-1548-435a-93a1-0e4b8c55de86",
+          "name": "UPDATE",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "todos/1"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Título actualizado\",\r\n  \"completed\": true\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "2207ab23-6b31-4294-8c39-ada7cb4ed11d"
+            }
+          ]
+        },
+        {
+          "id": "3545386c-978e-4cdc-b9a6-8442b2d98d14",
+          "name": "TODOS GET",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "todos"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "aba809b4-a5f3-4064-97df-b966a4a9c15b"
+            }
+          ]
+        },
+        {
+          "id": "1d503d54-fa11-488e-b29d-a6dd6e4ea11f",
+          "name": "TODOS GET 1",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "todos/1"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "de73e251-16e2-42ce-84d9-5ce0723f3cb8"
+            }
+          ]
+        },
+        {
+          "id": "db52bcdd-64d0-497f-872c-38321e260c7f",
+          "name": "TODOS UPDATE",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "todos/stats/summary"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "e77c8cf0-fa8a-40df-ad60-470a864db725"
+            }
+          ]
+        },
+        {
+          "id": "264ce947-10d8-41ee-9170-bd2cfa3e169d",
+          "name": "TODOS DELETE 1",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "todos/2"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "4775db21-5ddc-48f4-9989-d9bf0f60d864"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AUTH",
+      "description": "",
+      "item": [
+        {
+          "id": "327a5c25-d4f7-4592-8677-9928f8ff948d",
+          "name": "Login",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "auth/login"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"test@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "0b5562a8-da0e-4b09-9e57-63b2ed8b7dc9"
+            }
+          ]
+        },
+        {
+          "id": "01e820dc-e377-428b-8c72-750c995f0435",
+          "name": "Register",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "host": "localhost",
+              "path": [
+                "auth/register"
+              ],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"test@example.com\",\r\n  \"password\": \"password123\",\r\n  \"name\": \"Test User\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "1df6757e-1adc-4b41-a32a-ee0573f52aeb"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": []
+}
