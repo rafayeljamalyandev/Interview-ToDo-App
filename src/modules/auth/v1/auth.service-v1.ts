@@ -6,11 +6,11 @@ import {
 } from '@nestjs/common';
 import { ReqLoginDTO, ReqRegisterDTO } from './dto/request.dto';
 import { AuthRepository } from '../auth.repository';
-import { ComparePassword, HashPassword } from 'src/lib/bcrypt/bcrypt';
+import { ComparePassword, HashPassword } from '../../../lib/bcrypt/bcrypt';
+
 import { IAuthCreateUser } from './interface/auth.interface';
 import { ResLoginDTO, ResRegisterDTO } from './dto/response.dto';
-import { User } from '@prisma/client';
-import { JWTSign } from 'src/lib/jwt/jwt';
+import { JWTSign } from '../../../lib/jwt/jwt';
 import { AuthMappingV1 } from './mappings/auth.mappings-v1';
 
 @Injectable()
