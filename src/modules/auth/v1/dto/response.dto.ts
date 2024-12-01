@@ -3,3 +3,8 @@ export class ResRegisterDTO {
   email: string;
   password: string;
 }
+
+export class ResLoginDTO {
+  email: string;
+  token: string;
+}
