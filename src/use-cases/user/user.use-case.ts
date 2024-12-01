@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IDataServices } from '../../core/abstracts';
-import {   CreateUserDto, UpdateUserDto } from '../../core/dtos';
+import { CreateUserDto,   UpdateUserDto, UserLoginDto } from '../../core/dtos';
 import { UserFactoryService } from './user-factory.service';
 import {  User } from '../../core';
 
@@ -19,9 +19,13 @@ export class UserUseCases {
     return this.dataServices.user.get(id);
   }
 
-  createUser(createUserDto: CreateUserDto): Promise<User> {
+  register(createUserDto: CreateUserDto):  void  {
     const user = this.userFactoryService.createNewUser(createUserDto);
-    return this.dataServices.user.create(user);
+    this.dataServices.user.register(user);
+  }
+
+  login(userLoginDto: UserLoginDto): Promise<string> {
+    return this.dataServices.user.login(userLoginDto.email, userLoginDto.password);
   }
 
   updateUser(

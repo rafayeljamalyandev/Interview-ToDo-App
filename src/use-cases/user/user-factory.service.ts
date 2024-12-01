@@ -1,14 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '../../core/entities';
 import { CreateUserDto, UpdateUserDto } from '../../core/dtos';
+import * as bcrypt from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class UserFactoryService {
-  createNewUser(createUserDto: CreateUserDto) {
+  async createNewUser(createUserDto: CreateUserDto) {
     const newUser = new User();
     newUser.name = createUserDto.name;
     newUser.email = createUserDto.email;
-    newUser.password = createUserDto.password;
+    newUser.password = await bcrypt.hash(createUserDto.password, 10);
     return newUser;
   }
 

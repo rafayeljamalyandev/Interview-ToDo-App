@@ -1,18 +1,18 @@
 import { Controller, Get, Param, Post, Body, Put } from '@nestjs/common';
-import { GenreUseCases } from '../use-cases/genre/genre.use-case';
+import { TodoUseCases } from '../use-cases/todo/todo.use-case';
 
-@Controller('api/genre')
+@Controller('api/todo')
 export class TodoController {
-  constructor(private genreUseCases: GenreUseCases) {}
+  constructor(private todoUseCases: TodoUseCases) {}
 
   @Get()
-  async getAll() {
-    return this.genreUseCases.getAllGenres();
+  async getAllTodos() {
+    return this.todoUseCases.getAllTodos();
   }
 
   @Get(':id')
-  async getById(@Param('id') id: any) {
-    return this.genreUseCases.getGenreById(id);
+  async getTodoById(@Param('id') id: any) {
+    return this.todoUseCases.getTodoById(id);
   }
 
 }

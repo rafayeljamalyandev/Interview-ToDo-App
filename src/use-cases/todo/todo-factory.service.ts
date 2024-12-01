@@ -8,9 +8,7 @@ export class TodoFactoryService {
     const newTodo = new Todo();
     newTodo.title = createTodoDto.title;
     newTodo.description = createTodoDto.description;
-    newTodo.dueDate = createTodoDto.dueDate;
-    newTodo.state = createTodoDto.state;
-    newTodo.priority = createTodoDto.priority;
+    newTodo.completed = createTodoDto.completed;
     newTodo.userId = createTodoDto.userId;
     return newTodo;
   }
@@ -19,9 +17,7 @@ export class TodoFactoryService {
     const newTodo = new Todo();
     newTodo.title = updateTodoDto.title;
     newTodo.description = updateTodoDto.description;
-    newTodo.dueDate = updateTodoDto.dueDate;
-    newTodo.state = updateTodoDto.state;
-    newTodo.priority = updateTodoDto.priority;
+    newTodo.completed = updateTodoDto.completed;
     newTodo.userId = updateTodoDto.userId;
     return newTodo;
   }

@@ -1,6 +1,5 @@
 import { IsString, IsNotEmpty, IsDate } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
-import { TodoState } from '../entities/enums/todo-state.enum.dto';
 
 export class CreateTodoDto {
   @IsString()
@@ -11,13 +10,8 @@ export class CreateTodoDto {
   @IsNotEmpty()
   description: string;
 
-  @IsDate()
-  dueDate: Date;
-
   @IsNotEmpty()
-  priority: number;
-
-  state: TodoState;
+  completed: boolean;
 
   userId: number;
 }
