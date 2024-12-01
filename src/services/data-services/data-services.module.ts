@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MongoDataServicesModule } from '../../frameworks/data-services/mysql/mongo-data-services.module';
+import { MongoDataServicesModule } from '../../frameworks/data-services/mysql/prisma-data-services.module';
 
 @Module({
   imports: [MongoDataServicesModule],

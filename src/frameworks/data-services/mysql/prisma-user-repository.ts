@@ -3,6 +3,7 @@ import { PrismaService } from './prisma.service';
 import { ITodoGenericRepository } from '../../../core/abstracts/todo-repository.abstract';
 import { IUserGenericRepository } from '../../../core/abstracts/user-repository.abstract';
 import { User } from '../../../core';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class PrismaUserRepository<T> implements IUserGenericRepository<T> {
@@ -10,18 +11,15 @@ export class PrismaUserRepository<T> implements IUserGenericRepository<T> {
   }
 
   async register(item: T): Promise<T> {
+
     return await this.prismaService.user.create({
-      data: item as any,
-    }) as any;
+      data: item as Prisma.UserCreateInput,
+    }) as T;
   }
 
-  async login(email: string, password: string): Promise<string> {
+  async login(email: string, password: string): Promise<T> {
     const user = await this.prismaService.user.findUnique({ where: { email } });
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-      throw new Error('Invalid credentials');
-    }
-    return jwt.sign({ userId: user.id }, 'some_secret_key');
-    throw new Error('Method not implemented.');
+    return  user as T;
   }
 
   removeUser(id: number) {

@@ -32,7 +32,7 @@ export class TodoUseCases {
     return this.dataServices.todo.update(todoId, todo);
   }
 
-  getUserTodos( userId: string,): Promise<Todo[]> {
+  getUserTodos( userId: number,): Promise<Todo[]> {
     return this.dataServices.todo.getUserTodos(userId);
   }
 
