@@ -8,7 +8,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
-import { buildPaginatedResponse } from 'src/utils/build-pagination-response';
+import { buildPaginatedResponse } from '../utils/build-pagination-response';
 
 @Injectable()
 export class TodosService {
@@ -57,7 +57,6 @@ export class TodosService {
       sortOrder = 'desc',
     } = params;
     const skip = (page - 1) * limit;
-    console.log(params);
 
     const where = {
       userId,

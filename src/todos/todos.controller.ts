@@ -115,8 +115,8 @@ export class TodosController {
     @GetUser() user: User,
     @Query('completed') completed?: boolean,
     @Query('search') search?: string,
-    @Query('page') page?: number,
-    @Query('limit') limit?: number,
+    @Query('page', ParseIntPipe) page?: number,
+    @Query('limit', ParseIntPipe) limit?: number,
     @Query('sortBy') sortBy?: 'createdAt' | 'dueDate' | 'title',
     @Query('sortOrder') sortOrder?: 'asc' | 'desc',
   ) {

@@ -80,4 +80,14 @@ export class AuthService {
       token,
     };
   }
+
+  async getProfile(userId: number) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        todos: true,
+      },
+    });
+    return user;
+  }
 }

@@ -120,6 +120,6 @@ export class AuthController {
     description: 'Authentication required for this endpoint',
   })
   async getProfile(@GetUser() user: User) {
-    return user;
+    return this.authService.getProfile(user.id);
   }
 }
