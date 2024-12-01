@@ -1,20 +1,19 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
 import {
   errorResponse,
   ServiceResponse,
   successResponse,
 } from 'src/shared/utils';
+import { PrismaService } from '../prisma/prisma.service';
 import { AuthDto } from './dtos/auth.dto';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly configService: ConfigService,
+    private readonly jwtService: JwtService,
   ) {}
 
   /* User Info can have a separate DTO based on the properties we declare for user,
@@ -49,9 +48,9 @@ export class AuthService {
         return errorResponse('Invalid Credentials', HttpStatus.UNAUTHORIZED);
       }
 
-      const secret = this.configService.get('JWT_SECRET');
       const payload = { userId: user.id };
-      const token = jwt.sign(payload, secret);
+      // Jwt Secret is set in Module config
+      const token = await this.jwtService.signAsync(payload);
       return successResponse({ token: token });
     } catch (err) {
       return errorResponse(); // Will return Internal Server Error by default
