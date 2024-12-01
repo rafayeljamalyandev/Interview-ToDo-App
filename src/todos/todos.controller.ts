@@ -9,6 +9,7 @@ import {
   UseGuards,
   ParseIntPipe,
   Query,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -115,10 +116,11 @@ export class TodosController {
     @GetUser() user: User,
     @Query('completed') completed?: boolean,
     @Query('search') search?: string,
-    @Query('page', ParseIntPipe) page?: number,
-    @Query('limit', ParseIntPipe) limit?: number,
-    @Query('sortBy') sortBy?: 'createdAt' | 'dueDate' | 'title',
-    @Query('sortOrder') sortOrder?: 'asc' | 'desc',
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+    @Query('sortBy') sortBy: 'createdAt' | 'dueDate' | 'title' = 'createdAt',
+    @Query('sortOrder')
+    sortOrder: 'asc' | 'desc' = 'asc',
   ) {
     return this.todosService.findAll(user.id, {
       completed,

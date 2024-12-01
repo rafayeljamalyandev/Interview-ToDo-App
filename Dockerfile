@@ -1,5 +1,5 @@
 # Base image
-FROM node:18-alpine
+FROM node:18.18.0
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -23,4 +23,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Start command
-CMD ["npm", "run", "start"] 
+CMD ["npm", "run", "start:dev"] 

@@ -38,7 +38,7 @@ export class AuthController {
           email: 'newuser@domain.com',
           name: 'Alice Johnson',
         },
-        token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9...',
+        token: 'eyJhbGciOiJIUzUxfMiIsInR5cCI6IkpXVCJ9...',
       },
     },
   })
@@ -120,6 +120,10 @@ export class AuthController {
     description: 'Authentication required for this endpoint',
   })
   async getProfile(@GetUser() user: User) {
-    return this.authService.getProfile(user.id);
+    try {
+      return this.authService.getProfile(user.id);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

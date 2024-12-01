@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { BadRequestException, Logger, ValidationPipe } from '@nestjs/common';
+import { ResponseErrorInterceptor } from './middlewares/response.error.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,9 +20,11 @@ async function bootstrap() {
 
         return new BadRequestException(errorMessage);
       },
-      stopAtFirstError: true,
+      stopAtFirstError: false,
     }),
   );
+
+  app.useGlobalFilters(new ResponseErrorInterceptor()); // Enable logging interceptor
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Task Management API')
@@ -42,6 +45,11 @@ async function bootstrap() {
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api-docs', app, swaggerDocument);
+
+  // Serve Swagger JSON at '/swagger-json'
+  app.use('/swagger-json', (req, res) => {
+    res.send(swaggerDocument);
+  });
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
