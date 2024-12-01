@@ -148,8 +148,6 @@ Here are some of the available npm scripts:
 
 - **Testing**: [Jest](https://jestjs.io/);
 
--
-
 ---
 
 ## 💡 Directory Structure
@@ -218,6 +216,8 @@ This project is licensed under the **UNLICENSED** license.
 ---
 
 ## 🖼️ Screenshots
+![image](https://github.com/user-attachments/assets/d1200d37-c7e3-42fd-bf27-6a4be1fedcc5)
+
 
 
 ---
