@@ -1,16 +1,27 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from './auth.module';
-import { TodosModule } from './todos.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
+import { UserModule } from './user/user.module';
+import { TodosModule } from './toDo/todos.module';
+import { JwtStrategy } from './auth/jwt.strategy';
 
 @Module({
   imports: [
-    AuthModule,
-    TodosModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>("JWT_SECRET"),
+        signOptions: { expiresIn: "24h" },
+      }),
+      inject: [ConfigService],
+      global: true,
+    }),
+    UserModule,
+    TodosModule,
   ],
-  providers: [],
+  providers: [JwtStrategy],
 })
-export class AppModule {}
+export class AppModule { }
