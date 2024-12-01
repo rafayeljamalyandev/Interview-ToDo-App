@@ -6,8 +6,8 @@ import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(new ValidationPipe({ transform: true, whitelist: true }));
-  app.use(new AllExceptionFilter());
+  app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
+  app.useGlobalFilters(new AllExceptionFilter());
   const configService = app.get<ConfigService>(ConfigService);
   const port = configService.get<number>('PORT') || 3000;
   app
