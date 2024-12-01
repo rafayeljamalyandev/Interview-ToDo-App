@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 import { statusOK } from '../../common/helpers/http';
-import { paginationDefault } from 'src/common/helpers/pagination';
+import { paginationDefault } from '../../common/helpers/pagination';
 
 @Injectable()
 export class ResponseSuccessInterceptor implements NestInterceptor {
@@ -19,8 +19,7 @@ export class ResponseSuccessInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       map(async (response) => {
-        const resp = await response;
-
+        const resp = response;
         context.switchToHttp().getResponse().status(200);
 
         // default response, data is directly on resp
