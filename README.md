@@ -1,115 +1,226 @@
-# TODO App with NestJS, Prisma, and MySQL
+# 📝 Todo App
 
-This project is a simple TODO application built with **NestJS**, **Prisma**, and **MySQL**. It includes basic authentication and a TODO management system.
+Welcome to the **Todo App**! This project is built with the powerful [NestJS](https://nestjs.com/) framework and incorporates Prisma for database interactions, JWT for authentication, and a host of other modern tools to create a robust backend API. 🚀
 
-## Task for Candidates
+## 🌟 Features
 
-You are tasked with **reviewing, improving, and fixing this codebase**. This application intentionally contains poor practices, missing features, and bugs. Your goal is to refactor and enhance the project while following modern backend development best practices.
-
----
-
-## Requirements
-
-Your submission must include the following:
-
-### 1. **Code Improvements**
-- Refactor the codebase to follow clean architecture and modular design principles.
-- Ensure proper error handling (e.g., try-catch blocks, meaningful HTTP response codes).
-- Implement middleware for authentication and JWT validation.
-- Use DTOs and validation pipes for incoming requests.
-- Avoid hardcoded values (e.g., `.env` for sensitive information).
-- Improve database queries to handle edge cases and optimize performance.
-- Add meaningful comments where necessary.
-
-### 2. **Unit and Integration Tests**
-- Write unit tests for critical services (e.g., authentication, TODO management).
-- Write at least one integration test to validate the API behavior end-to-end.
-
-### 3. **Documentation**
-- Create documentation for the APIs using Postman and put the exported collection as json in the `documentation/api` folder.
-- Provide instructions for setting up and running the project locally.
-
-### 4. **Edge Cases**
-- Handle edge cases such as invalid user input, empty TODO lists, invalid authentication tokens, etc.
+- 🔐 **Authentication**: Secure login and signup with JWT.
+- 📚 **Swagger API Docs**: Auto-generated documentation for the API.
+- 📦 **Prisma ORM**: Smooth integration with the database.
+- 📜 **Validation**: Input validation with `class-validator`.
+- 🔧 **Scalable Structure**: Built with modularity and scalability in mind.
+- ✅ **Tests**: Comprehensive unit and e2e tests with Jest.
 
 ---
 
-## Getting Started
+## 🛠️ Getting Started
 
-### Prerequisites
+### 1️⃣ Prerequisites
 
-Ensure you have the following tools installed:
-- **Node.js** (v16 or higher)
-- **MySQL** (local instance or Docker)
-- **npm** 
-- **Git**
+Ensure you have the following installed:
 
-### Installation
+- **Node.js** (v18+)
+- **npm** or **yarn**
+- **Docker** (for database setup with MySQL & nest running on docker container)
 
-1. Clone the repository:
-```bash
-git clone https://github.com/rafayeljamalyandev/Interview-ToDo-App.git
-```
-
-2.	Install dependencies:
-```bash
-npm install
-```
-
-3.	Set up the .env file:
-```bash
-DATABASE_URL="mysql://root:password@localhost:3306/todoapp"
-JWT_SECRET="some_secret_key"
-```
-
-4.	Apply Prisma migrations:
+### 2️⃣ Clone the Repository
 
 ```bash
-npx prisma migrate dev
+$ git clone https://github.com/<your-repo>/todo-app.git
+$ cd todo-app
 ```
 
-
-5.	Start the application:
-```bash
-npm run start:dev
-```
-
-## Submission Format
-
-1.	Create a Fork
-•	Fork this repository to your personal GitHub account.
-2.	Create a Feature Branch
-•	Create a new branch for your work:
+### 3️⃣ Install Dependencies
 
 ```bash
-git checkout -b candidate-improvements
+$ npm install
 ```
 
-3.	Make Changes
-  •	Commit your improvements and push them to your branch.
-4.	Open a Merge Request (MR)
-  •	Submit a pull request (PR) from your feature branch to the main branch of this repository.
-5.	Provide a Summary
-  •	In your MR description, include:
-  •	A brief overview of the changes.
-  •	Key improvements and fixes.
-  •	Instructions for testing your changes.
+### 4️⃣ Environment Setup
 
-## Evaluation Criteria
+Create a `.env` file in the root of the project with the following variables:
 
-Your submission will be evaluated based on the following:
-1.	Code quality and readability.
-2.	Adherence to best practices.
-3.	Error handling and edge case management.
-4.	Test coverage and quality of tests.
-5.	Proper use of Prisma and database handling.
-6.	Documentation and clarity of instructions.
+```env
+DATABASE_URL="mysql://root:yourRootPassword@localhost:3306/yourDatabaseName?allowPublicKeyRetrieval=true&useSSL=false"
+MYSQL_ROOT_PASSWORD=yourRootPassword
+MYSQL_DATABASE=yourDatabaseName
+MYSQL_USER=yourUsername
+MYSQL_PASSWORD=yourUserPassword
 
-Tips
-•	Focus on making the code modular and maintainable.
-•	Write meaningful commit messages.
-•	Don’t overcomplicate — aim for clarity and maintainability.
+# API Configuration
+PORT=3000
+NODE_ENV=development
 
-Good luck! 🚀
+# JWT Configuration
+JWT_SECRET="superSecretSauce123!"
+JWT_EXPIRATION=24h
 
-Let me know if you need further customization for the `README.md` file or assistance!
+```
+
+### 5️⃣ Run the Application
+
+#### Development Mode
+
+```bash
+$ npm run start:dev
+```
+
+#### Production Mode
+
+```bash
+$ npm run build
+$ npm run start:prod
+```
+
+### 6️⃣ Access the Application
+
+- **API**: [http://localhost:3000](http://localhost:3000)
+- **Swagger Docs**: [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+
+---
+
+## 🐳 Docker Setup
+
+### Start the App with Docker Compose
+
+```bash
+$ docker-compose up --build
+```
+
+### Stop the App
+
+```bash
+$ docker-compose down
+```
+
+---
+
+## 🧪 Testing
+
+Run tests with Jest:
+
+- **Unit Tests**:
+  ```bash
+  $ npm run test
+  ```
+- **Watch Mode**:
+  ```bash
+  $ npm run test:watch
+  ```
+- **End-to-End Tests**:
+  ```bash
+  $ npm run test:e2e
+  ```
+- **Coverage**:
+  ```bash
+  $ npm run test:cov
+  ```
+
+---
+
+## 📜 Scripts
+
+Here are some of the available npm scripts:
+
+| Script        | Description                                |
+| ------------- | ------------------------------------------ |
+| `start`       | Starts the application in production mode. |
+| `start:dev`   | Starts the application in watch mode.      |
+| `start:debug` | Starts the application in debug mode.      |
+| `build`       | Builds the application.                    |
+| `test`        | Runs unit tests.                           |
+| `test:e2e`    | Runs end-to-end tests.                     |
+| `test:cov`    | Generates test coverage report.            |
+| `lint`        | Lints the project files.                   |
+| `format`      | Formats the codebase using Prettier.       |
+
+---
+
+## 📚 Tech Stack
+
+- **Framework**: [NestJS](https://nestjs.com/)
+
+- **Database ORM**: [Prisma](https://www.prisma.io/)
+
+- **Authentication**: [JWT](https://jwt.io/) & [Passport.js](http://www.passportjs.org/)
+
+- **Validation**: [class-validator](https://github.com/typestack/class-validator)
+
+- **Testing**: [Jest](https://jestjs.io/);
+
+---
+
+## 💡 Directory Structure
+
+```plaintext
+📂 src
+├── app.controller.ts
+├── app.module.ts
+├── app.service.ts
+├──📂 auth
+│   ├── auth.controller.ts
+│   ├── auth.integration.spec.ts
+│   ├── auth.module.ts
+│   ├── auth.service.spec.ts
+│   ├── auth.service.ts
+│   ├──📂 dto
+│   │   ├── login.dto.ts
+│   │   └── register.dto.ts
+│   ├──📂 guards
+│   │   └── jwt-auth.guard.ts
+│   └──📂 strategies
+│       └── jwt.strategy.ts
+├── 📂common
+│   ├──📂 decorators
+│   │   └── get-user.decorator.ts
+│   └──📂 interfaces
+│       └── jwt-payload.interface.ts
+├── main.ts
+├──📂 middlewares
+│   └── response.error.interceptor.ts
+├──📂 prisma
+│   ├── prisma.module.ts
+│   └── prisma.service.ts
+├──📂 todos
+│   ├──📂 dto
+│   │   ├── create-todo.dto.ts
+│   │   ├── todo.dto.ts
+│   │   └── update-todo.dto.ts
+│   ├── todos.controller.ts
+│   ├── todos.integration.spec.ts
+│   ├── todos.module.ts
+│   ├── todos.service.spec.ts
+│   └── todos.service.ts
+└──📂 utils
+    └── build-pagination-response.ts
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open issues or submit PRs to improve this project. 🚀
+
+---
+
+## 🛡️ License
+
+This project is licensed under the **UNLICENSED** license.
+
+---
+
+## ✨ Author
+
+**Zaid Selmi**
+
+---
+
+## 🖼️ Screenshots
+![image](https://github.com/user-attachments/assets/d1200d37-c7e3-42fd-bf27-6a4be1fedcc5)
+
+
+
+---
+
+Made with ❤️ by [Zaid Selmi](https://github.com/zaid4kspr).
+
