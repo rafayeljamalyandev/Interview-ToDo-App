@@ -1,5 +1,6 @@
 import {
   ArgumentsHost,
+  BadRequestException,
   ExceptionFilter,
   HttpException,
   HttpStatus,
@@ -16,8 +17,17 @@ export class AllExceptionFilter implements ExceptionFilter {
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
     let message = 'Internal Server Error';
 
-    // set Status and Message if error is a HTTP error
-    if (exception instanceof HttpException) {
+    if (exception instanceof BadRequestException) {
+      // Concatenate validation errors if there are one or many errors
+      status = exception.getStatus();
+      const exceptionObj: any = exception.getResponse();
+
+      // if its not an Array, then its not coming from Custom Validation Pipe
+      message = Array.isArray(exceptionObj.errors)
+        ? exceptionObj.errors.join('\n')
+        : exception.message;
+    } else if (exception instanceof HttpException) {
+      // set Status and Message if error is a HTTP error
       status = exception.getStatus();
       message = exception.message;
     }
