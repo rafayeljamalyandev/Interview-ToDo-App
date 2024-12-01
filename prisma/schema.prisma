@@ -11,6 +11,7 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
+  todos    Todo[] @relation("UserTodos")
 }
 
 model Todo {
@@ -18,4 +19,5 @@ model Todo {
   title     String
   completed Boolean @default(false)
   userId    Int
+  user      User    @relation("UserTodos", fields: [userId], references: [id])
 }
