@@ -4,16 +4,14 @@ import { IsEmail, IsString, MinLength, MaxLength } from 'class-validator';
 export class RegisterDto {
   @ApiProperty({
     example: 'user@domain.com',
-    description:
-      'A valid email address for the user, used for login and notifications.',
+    description: 'A valid email address for the user, used for login and notifications.',
   })
   @IsEmail({}, { message: 'Invalid email address.' })
   email: string;
 
   @ApiProperty({
     example: 'secureP@ssw0rd',
-    description:
-      'The password for the user account, must be between 6 and 20 characters.',
+    description: 'The password for the user account, must be between 6 and 20 characters.',
   })
   @IsString()
   @MinLength(6)

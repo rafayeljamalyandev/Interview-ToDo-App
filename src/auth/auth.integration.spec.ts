@@ -130,13 +130,11 @@ describe('AuthController (e2e)', () => {
         email: 'existinguser@domain.com',
         name: 'Existing User',
       };
-      jest
-        .spyOn(mockJwtAuthGuard, 'canActivate')
-        .mockImplementationOnce((context: any): boolean => {
-          const req = context.switchToHttp().getRequest();
-          req.user = mockUser; // Inject mock user into req.user
-          return true;
-        });
+      jest.spyOn(mockJwtAuthGuard, 'canActivate').mockImplementationOnce((context: any): boolean => {
+        const req = context.switchToHttp().getRequest();
+        req.user = mockUser; // Inject mock user into req.user
+        return true;
+      });
 
       mockPrismaService.user.findUnique.mockResolvedValueOnce({
         ...mockUser,
@@ -159,9 +157,7 @@ describe('AuthController (e2e)', () => {
     });
 
     it('should return unauthorized error if no token is provided', async () => {
-      jest
-        .spyOn(mockJwtAuthGuard, 'canActivate')
-        .mockImplementationOnce(() => false);
+      jest.spyOn(mockJwtAuthGuard, 'canActivate').mockImplementationOnce(() => false);
 
       await request(app.getHttpServer()).get('/auth/profile').expect(403);
     });

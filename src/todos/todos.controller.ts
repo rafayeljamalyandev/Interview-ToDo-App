@@ -11,14 +11,7 @@ import {
   Query,
   DefaultValuePipe,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiBearerAuth,
-  ApiParam,
-  ApiQuery,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiParam, ApiQuery } from '@nestjs/swagger';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
@@ -180,11 +173,7 @@ export class TodosController {
     },
   })
   @ApiResponse({ status: 404, description: 'Todo not found' })
-  update(
-    @GetUser() user: User,
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateTodoDto: UpdateTodoDto,
-  ) {
+  update(@GetUser() user: User, @Param('id', ParseIntPipe) id: number, @Body() updateTodoDto: UpdateTodoDto) {
     return this.todosService.update(user.id, id, updateTodoDto);
   }
 
@@ -222,10 +211,7 @@ export class TodosController {
     },
   })
   @ApiResponse({ status: 404, description: 'Todo not found' })
-  markAsCompleted(
-    @GetUser() user: User,
-    @Param('id', ParseIntPipe) id: number,
-  ) {
+  markAsCompleted(@GetUser() user: User, @Param('id', ParseIntPipe) id: number) {
     return this.todosService.markAsCompleted(user.id, id);
   }
 }

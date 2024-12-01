@@ -1,12 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import {
-  IsString,
-  IsOptional,
-  MaxLength,
-  MinLength,
-  ValidateIf,
-  IsDateString,
-} from 'class-validator';
+import { IsString, IsOptional, MaxLength, MinLength, ValidateIf, IsDateString } from 'class-validator';
 
 export class CreateTodoDto {
   @ApiProperty({
@@ -32,10 +25,7 @@ export class CreateTodoDto {
     description: 'The deadline for completing the todo item (optional).',
   })
   @ValidateIf((_object, value) => value !== undefined) // Ensures the field is optional
-  @IsDateString(
-    {},
-    { message: 'Due date must be a valid ISO 8601 date string.' },
-  )
+  @IsDateString({}, { message: 'Due date must be a valid ISO 8601 date string.' })
   @IsOptional()
   dueDate?: string;
 }

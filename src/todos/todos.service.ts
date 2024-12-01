@@ -1,10 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  ConflictException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, ConflictException, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
@@ -48,14 +42,7 @@ export class TodosService {
       sortOrder?: 'asc' | 'desc';
     } = {},
   ) {
-    const {
-      completed,
-      search,
-      page = 1,
-      limit = 10,
-      sortBy = 'createdAt',
-      sortOrder = 'desc',
-    } = params;
+    const { completed, search, page = 1, limit = 10, sortBy = 'createdAt', sortOrder = 'desc' } = params;
     const skip = (page - 1) * limit;
 
     const where = {
@@ -64,10 +51,7 @@ export class TodosService {
         completedAt: completed ? { not: null } : null,
       }),
       ...(search && {
-        OR: [
-          { title: { contains: search } },
-          { description: { contains: search } },
-        ],
+        OR: [{ title: { contains: search } }, { description: { contains: search } }],
       }),
     };
 
@@ -97,9 +81,7 @@ export class TodosService {
       });
 
       if (!todo) {
-        throw new NotFoundException(
-          `Todo with ID ${id} not found or you don't have access to it`,
-        );
+        throw new NotFoundException(`Todo with ID ${id} not found or you don't have access to it`);
       }
 
       return todo;
@@ -161,11 +143,7 @@ export class TodosService {
   }
 
   // Helper Methods
-  private async ensureNoDuplicateTitle(
-    userId: number,
-    title: string,
-    excludeId?: number,
-  ) {
+  private async ensureNoDuplicateTitle(userId: number, title: string, excludeId?: number) {
     const duplicateTodo = await this.prisma.todo.findFirst({
       where: {
         userId,
@@ -179,9 +157,6 @@ export class TodosService {
   }
 
   private logError(operation: string, userId: number, error: any) {
-    this.logger.error(
-      `Error in operation "${operation}" for user ${userId}:`,
-      error.stack,
-    );
+    this.logger.error(`Error in operation "${operation}" for user ${userId}:`, error.stack);
   }
 }

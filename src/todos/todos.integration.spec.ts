@@ -17,9 +17,7 @@ describe('TodosController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(
-      new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
-    );
+    app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
 
     await app.init();
 
@@ -105,10 +103,7 @@ describe('TodosController (e2e)', () => {
       .expect(200);
 
     expect(response.body).toHaveProperty('title', updateTodoDto.title);
-    expect(response.body).toHaveProperty(
-      'description',
-      updateTodoDto.description,
-    );
+    expect(response.body).toHaveProperty('description', updateTodoDto.description);
   });
 
   it('should mark a todo as completed', async () => {
@@ -125,17 +120,11 @@ describe('TodosController (e2e)', () => {
       .expect(200);
 
     // Verify deletion
-    await request(app.getHttpServer())
-      .get(`/todos/${todoId}`)
-      .set('Authorization', `Bearer ${authToken}`)
-      .expect(404);
+    await request(app.getHttpServer()).get(`/todos/${todoId}`).set('Authorization', `Bearer ${authToken}`).expect(404);
   });
 
   it('should return 404 for a non-existent todo', async () => {
-    await request(app.getHttpServer())
-      .get('/todos/9999')
-      .set('Authorization', `Bearer ${authToken}`)
-      .expect(404);
+    await request(app.getHttpServer()).get('/todos/9999').set('Authorization', `Bearer ${authToken}`).expect(404);
   });
 
   it('should return 400 for invalid input during todo creation', async () => {
@@ -145,8 +134,6 @@ describe('TodosController (e2e)', () => {
       .set('Authorization', `Bearer ${authToken}`)
       .expect(400);
 
-    expect(response.body.message.toString()).toContain(
-      'Title must be at least 3 characters long',
-    );
+    expect(response.body.message.toString()).toContain('Title must be at least 3 characters long');
   });
 });

@@ -1,11 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TodosService } from './todos.service';
 import { PrismaService } from '../prisma/prisma.service';
-import {
-  NotFoundException,
-  BadRequestException,
-  ConflictException,
-} from '@nestjs/common';
+import { NotFoundException, BadRequestException, ConflictException } from '@nestjs/common';
 
 const mockPrismaService = {
   todo: {
@@ -24,10 +20,7 @@ describe('TodosService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        TodosService,
-        { provide: PrismaService, useValue: mockPrismaService },
-      ],
+      providers: [TodosService, { provide: PrismaService, useValue: mockPrismaService }],
     }).compile();
 
     service = module.get<TodosService>(TodosService);
@@ -55,16 +48,14 @@ describe('TodosService', () => {
     });
 
     it('should throw a BadRequestException if due date is in the past', async () => {
-      await expect(
-        service.create(1, { title: 'Test Todo', dueDate: '2000-01-01' }),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.create(1, { title: 'Test Todo', dueDate: '2000-01-01' })).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should throw a ConflictException if title is a duplicate', async () => {
       prisma.todo.findFirst.mockResolvedValue({ id: 1, title: 'Test Todo' });
-      await expect(
-        service.create(1, { title: 'Test Todo', dueDate: null }),
-      ).rejects.toThrow(ConflictException);
+      await expect(service.create(1, { title: 'Test Todo', dueDate: null })).rejects.toThrow(ConflictException);
     });
   });
 
@@ -125,9 +116,7 @@ describe('TodosService', () => {
         title: 'Duplicate Title',
       }); // Duplicate title
 
-      await expect(
-        service.update(1, 1, { title: 'Duplicate Title' }),
-      ).rejects.toThrow(ConflictException);
+      await expect(service.update(1, 1, { title: 'Duplicate Title' })).rejects.toThrow(ConflictException);
     });
   });
 

@@ -15,8 +15,7 @@ async function bootstrap() {
       whitelist: true, // Get rid of properties that are not in the DTO
       forbidNonWhitelisted: false, // Throw error if there are extra properties
       exceptionFactory: (errors) => {
-        const errorMessage =
-          errors[0]?.constraints[Object.keys(errors[0].constraints)[0]];
+        const errorMessage = errors[0]?.constraints[Object.keys(errors[0].constraints)[0]];
 
         return new BadRequestException(errorMessage);
       },
@@ -24,7 +23,7 @@ async function bootstrap() {
     }),
   );
 
-  app.useGlobalFilters(new ResponseErrorInterceptor()); // Enable logging interceptor
+  app.useGlobalFilters(new ResponseErrorInterceptor());
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Task Management API')
@@ -55,9 +54,7 @@ async function bootstrap() {
   await app.listen(port);
 
   logger.log(`Application is running on: http://localhost:${port}`);
-  logger.log(
-    `Swagger documentation is available at: http://localhost:${port}/api-docs`,
-  );
+  logger.log(`Swagger documentation is available at: http://localhost:${port}/api-docs`);
 }
 
 bootstrap();
