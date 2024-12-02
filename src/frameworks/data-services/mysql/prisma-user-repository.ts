@@ -8,6 +8,7 @@ import { Prisma } from '@prisma/client';
 @Injectable()
 export class PrismaUserRepository<T> implements IUserGenericRepository<T> {
   constructor(private readonly prismaService: PrismaService) {}
+
   async register(item: T): Promise<T> {
     return (await this.prismaService.user.create({
       data: {

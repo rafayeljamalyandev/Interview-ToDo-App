@@ -10,7 +10,6 @@ export class PrismaTodoRepository<T> implements ITodoGenericRepository<T> {
   async createTodo(item: T): Promise<T> {
     try {
       let itemData = item as Prisma.TodoUncheckedCreateInput;
-      // Create todo with transaction for atomicity
       return (await this.prismaService.$transaction(async (tx) => {
         return tx.todo.create({
           data: {

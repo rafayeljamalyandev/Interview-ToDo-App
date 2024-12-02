@@ -6,7 +6,7 @@ import { UserUseCases } from '../../../use-cases/user/user.use-case';
 export class UserController {
   constructor(private userUseCases: UserUseCases) {}
 
-  @Post()
+  @Post('/register')
   async register(@Body() userDto: CreateUserDto) {
     let result= await this.userUseCases.register(userDto);
     return {
@@ -15,7 +15,7 @@ export class UserController {
     };
   }
 
-  @Post()
+  @Post('/login')
   login(@Body() userLoginDto: UserLoginDto) {
     let token = this.userUseCases.login(userLoginDto);
     return {
