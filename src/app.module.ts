@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DataServicesModule } from './services/data-services/data-services.module';
 import { UserUseCasesModule } from './use-cases/user/user-use-cases.module';
 import { TodoUseCasesModule } from './use-cases/todo/todo-use-cases.module';
-import { AppController, TodoController, UserController } from './controllers';
+import {  TodoController, UserController } from './controllers';
 
 @Module({
   imports: [
@@ -16,7 +16,6 @@ import { AppController, TodoController, UserController } from './controllers';
     TodoUseCasesModule,
   ],
   controllers: [
-    AppController,
     TodoController,
     UserController,
   ],

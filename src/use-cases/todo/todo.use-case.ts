@@ -3,6 +3,10 @@ import { IDataServices } from '../../core/abstracts';
 import { CreateTodoDto, CreateUserDto, UpdateTodoDto, UpdateUserDto } from '../../core/dtos';
 import { TodoFactoryService } from './todo-factory.service';
 import {    Todo } from '../../core';
+import {UserNotFoundException} from "../../core/exceptions/user-not-found-exception";
+import {UserIdIsRequiredException} from "../../core/exceptions/userid-is-required-exception";
+import {TodoTitleCannotBeEmpty} from "../../core/exceptions/todo-title-cannot-be-empty";
+import {Prisma} from "@prisma/client";
 
 @Injectable()
 export class TodoUseCases {
@@ -11,19 +15,37 @@ export class TodoUseCases {
     private todoFactoryService: TodoFactoryService,
   ) {}
 
-  createTodo(createTodoDto: CreateTodoDto): Promise<Todo> {
+  async createTodo(createTodoDto: CreateTodoDto): Promise<Todo> {
+    if (!createTodoDto.userId) {
+      throw new UserIdIsRequiredException();
+    }
+    if (!createTodoDto.title || createTodoDto.title.trim().length === 0) {
+      throw new TodoTitleCannotBeEmpty();
+    }
     const todo = this.todoFactoryService.createNewTodo(createTodoDto);
+    const userExists = await this.dataServices.todo.checkUserExist(todo.userId);
+    if (!userExists) {
+      throw new UserNotFoundException();
+    }
     return this.dataServices.todo.createTodo(todo);
   }
 
-  listTodos( userId: number,): Promise<Todo[]> {
-    return this.dataServices.todo.listTodos(userId);
+
+  async listTodos(userId: number, skip?: number,take?: number): Promise<Todo[]> {
+    if (!userId) {
+      throw new UserIdIsRequiredException();
+    }
+    const userExists = await this.dataServices.todo.checkUserExist(userId);
+    if (!userExists) {
+      throw new UserNotFoundException();
+    }
+    return this.dataServices.todo.listTodos(userId, skip,take);
   }
 
-  updateTodo(
-    todoId: string,
-    updateTodoDto: UpdateTodoDto,
-  ): Promise<Todo> {
+
+  //---------------------------------------------------------------------------------------
+
+  updateTodo(todoId: string, updateTodoDto: UpdateTodoDto): Promise<Todo> {
     const todo = this.todoFactoryService.updateTodo(updateTodoDto);
     return this.dataServices.todo.update(todoId, todo);
   }

@@ -5,6 +5,7 @@ import { UserFactoryService } from './user-factory.service';
 import { User } from '../../core';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
+import {UserNotFoundException} from "../../core/exceptions/user-not-found-exception";
 
 @Injectable()
 export class UserUseCases {
@@ -30,7 +31,7 @@ export class UserUseCases {
   async login(userLoginDto: UserLoginDto): Promise<string> {
     let user = await this.dataServices.user.login(userLoginDto.email, userLoginDto.password);
     if (!user || !(await bcrypt.compare(userLoginDto.password, user.password))) {
-      throw new Error('Invalid credentials');
+      throw new UserNotFoundException(userLoginDto.email);
     }
     return jwt.sign({ userId: user.id }, 'some_secret_key');
   }
