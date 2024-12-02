@@ -140,6 +140,36 @@ describe('AuthService', () => {
     });
   });
 
+
+
+  describe('register', () => {
+  it('should throw ConflictException if email already exists', async () => {
+    jest.spyOn(prismaService.user, 'create').mockRejectedValue(
+      new PrismaClientKnownRequestError("Unauthorized", { code: 'P2002', clientVersion: "" }),
+    );
+
+    await expect(service.register('test@example.com', 'password123')).rejects.toThrow(
+      ConflictException,
+    );
+  });
+
+  it('should throw UnauthorizedException if authentication fails', async () => {
+    jest.spyOn(prismaService.user, 'create').mockRejectedValue(new UnauthorizedException('Unauthorized'));
+
+    await expect(service.register('test@example.com', 'password123')).rejects.toThrow(
+      UnauthorizedException,
+    );
+  });
+
+  it('should throw InternalServerErrorException for other errors', async () => {
+    jest.spyOn(prismaService.user, 'create').mockRejectedValue(new InternalServerErrorException('Unknown error'));
+
+    await expect(service.register('test@example.com', 'password123')).rejects.toThrow(
+      InternalServerErrorException,
+    );
+  });
+});
+
   afterAll(async()=>{
     
     await prisma.$disconnect;

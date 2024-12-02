@@ -37,7 +37,6 @@ export class TodoController {
       const todo = await this.todoService.getTodoById(id, req.user.id);
       return { message: 'Todo fetched successfully', data: todo };
     } catch (error) {
-      console.log(error)
       throw new HttpException(error.message, error.status || 500);
     }
   }

@@ -94,21 +94,6 @@ describe('AuthController', () => {
     });
   });
 
-  describe('profile', () => {
-    it('should return the user profile for authenticated requests', async () => {
-      const mockRequest = { user: { id: 1, email: 'test@example.com' } };
-      const mockJwtAuthGuard = {
-        canActivate: jest.fn().mockReturnValue(true),
-      };
-
-      Reflect.defineMetadata('guard', mockJwtAuthGuard, JwtAuthGuard);
-
-      const result = await controller.profile(mockRequest);
-
-      expect(result).toEqual(mockRequest.user);
-    });
-  });
-
   afterAll(async ()=>{
     await prisma.$disconnect();
   })

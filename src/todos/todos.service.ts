@@ -5,6 +5,7 @@ import { UpdateTodoDto} from './dto/update-todo-dto';
 
 @Injectable()
 export class TodoService {
+  delete: any;
   constructor(private readonly prisma: PrismaService) {}
 
   // Create a new Todo for a user

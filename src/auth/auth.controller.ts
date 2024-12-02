@@ -36,11 +36,5 @@ async login(@Body() LoginDto:LoginDto){
     throw error;
   }
 }
-
-
-@Post('profile')
-@UseGuards(JwtAuthGuard)
-async profile(@Request() req){
-  return req.user
 }
-}
+
