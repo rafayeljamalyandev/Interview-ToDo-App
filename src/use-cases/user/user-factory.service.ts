@@ -8,7 +8,6 @@ import * as jwt from 'jsonwebtoken';
 export class UserFactoryService {
   async createNewUser(createUserDto: CreateUserDto) {
     const newUser = new User();
-    newUser.name = createUserDto.name;
     newUser.email = createUserDto.email;
     newUser.password = await bcrypt.hash(createUserDto.password, 10);
     return newUser;
@@ -16,7 +15,6 @@ export class UserFactoryService {
 
   updateUser(updateUserDto: UpdateUserDto) {
     const newUser = new User();
-    newUser.name = updateUserDto.name;
     newUser.email = updateUserDto.email;
     newUser.password = updateUserDto.password;
     return newUser;
