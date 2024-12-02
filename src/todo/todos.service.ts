@@ -1,34 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
 import { CreateTodoDto } from './dtos/todo.dto';
 import {
   errorResponse,
   ServiceResponse,
   successResponse,
 } from 'src/shared/utils';
+import { Todo } from './models/todo.model';
+import { ITodoRepository } from './models/todo.repository.intf';
 
 @Injectable()
 export class TodosService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly todoRepository: ITodoRepository) {}
 
   async createTodo(
-    userId: number,
+    userId: string,
     TodoInfo: CreateTodoDto,
   ): Promise<ServiceResponse> {
     try {
-      const todo = await this.prisma.todo.create({
-        data: { userId, title: TodoInfo.title },
-      });
+      const todo = new Todo(null, TodoInfo.title, false, userId);
+      const newTodo = await this.todoRepository.createTodo(todo);
 
-      return successResponse(todo);
+      return successResponse(newTodo);
     } catch (err) {
       return errorResponse(); // Will return Internal Server Error by default
     }
   }
 
-  async listTodos(userId: number) {
+  async getUserTodoList(userId: string) {
     try {
-      const todoList = await this.prisma.todo.findMany({ where: { userId } });
+      const todoList = await this.todoRepository.getTodoList(userId);
 
       return successResponse(todoList);
     } catch (err) {
