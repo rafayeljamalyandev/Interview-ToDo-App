@@ -9,6 +9,7 @@ import {
 import { AuthDto } from './dtos/auth.dto';
 import { IUserRepository } from './models/repository.intf';
 import { User } from './models/model';
+import { CreateUserDto } from './dtos/user.dto';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(userInfo: AuthDto): Promise<ServiceResponse> {
+  async register(userInfo: CreateUserDto): Promise<ServiceResponse> {
     try {
       const existingUser = await this.userRepository.getUserByEmail(
         userInfo.email,
