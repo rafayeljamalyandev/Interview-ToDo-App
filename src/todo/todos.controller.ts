@@ -25,13 +25,13 @@ export class TodosController {
     @Body() body: CreateTodoDto,
     @Res({ passthrough: true }) response: Response,
   ) {
-    const result = await this.todosService.createTodo(req.user.id, body);
+    const result = await this.todosService.createTodo(req.user.userId, body);
     response.status(result.code).json(result);
   }
 
   @Get()
   async list(@Req() req: any, @Res({ passthrough: true }) response: Response) {
-    const result = await this.todosService.listTodos(req.user.id);
+    const result = await this.todosService.getUserTodoList(req.user.userId);
     response.status(result.code).json(result);
   }
 }
