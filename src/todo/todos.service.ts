@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateTodoDto } from './dtos/todo.dto';
 import {
   errorResponse,
@@ -10,7 +10,9 @@ import { ITodoRepository } from './models/todo.repository.intf';
 
 @Injectable()
 export class TodosService {
-  constructor(private readonly todoRepository: ITodoRepository) {}
+  constructor(
+    @Inject('IUserRepository') private readonly todoRepository: ITodoRepository,
+  ) {}
 
   async createTodo(
     userId: string,
