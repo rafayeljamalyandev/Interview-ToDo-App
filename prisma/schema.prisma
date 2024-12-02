@@ -9,13 +9,15 @@ datasource db {
 
 model User {
   id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
+  email    String @unique @db.Varchar(100)
+  password String @db.Varchar(60)
 }
 
 model Todo {
   id        Int     @id @default(autoincrement())
-  title     String
+  title     String  @db.Varchar(100)
   completed Boolean @default(false)
   userId    Int
+
+  @@index([userId])
 }
