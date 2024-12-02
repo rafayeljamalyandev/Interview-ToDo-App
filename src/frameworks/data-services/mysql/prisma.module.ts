@@ -5,14 +5,13 @@ import { PrismaUserRepository } from './prisma-user-repository';
 import { IUserGenericRepository } from '../../../core/abstracts/user-repository.abstract';
 import { ITodoGenericRepository } from '../../../core/abstracts/todo-repository.abstract';
 import { PrismaTodoRepository } from './prisma-todo-repository';
-import { PrismaDataServices } from './prisma-data-services';
 
 @Module({
   providers: [
     PrismaService,
     {
       provide: IDataServices,
-      useClass: PrismaDataServices,
+      useClass: PrismaTodoRepository,
     },
   ],
   exports: [

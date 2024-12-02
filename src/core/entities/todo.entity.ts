@@ -1,3 +1,4 @@
+import { User } from './user.entity';
 
 export class Todo {
   id: number;
@@ -5,7 +6,7 @@ export class Todo {
   description: string;
   completed: boolean;
   userId: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 
 }

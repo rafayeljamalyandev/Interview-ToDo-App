@@ -6,5 +6,4 @@ export abstract class IUserGenericRepository<T> extends IBaseRepository<T> {
 
   abstract login(email: string,password:string): Promise<T>;
 
-  abstract removeUser(id: number );
 }
