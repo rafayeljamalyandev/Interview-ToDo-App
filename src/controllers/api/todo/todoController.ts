@@ -9,7 +9,11 @@ export class TodoController {
   @Post()
   async createTodo(@Body() body: CreateTodoDto, @Req() req) {
     try {
-      return this.todoUseCases.createTodo(body);
+      let result = this.todoUseCases.createTodo(body);
+      return {
+        status: 200,
+        result,
+      };
     } catch (error) {
       throw error;
     }
@@ -18,7 +22,11 @@ export class TodoController {
   @Get()
   async listTodos(@Req() req) {
     try {
-      return this.todoUseCases.listTodos(req.user.id);
+      let result = this.todoUseCases.listTodos(req.user.id);
+      return {
+        status: 200,
+        result,
+      };
     } catch (error) {
       throw error;
     }
@@ -30,7 +38,8 @@ export class TodoController {
   // async getAllTodos() {
   //   return this.todoUseCases.getAllTodos();
   // }
-  //
+
+
   // @Get(':id')
   // async getTodoById(@Param('id') id: any) {
   //   return this.todoUseCases.getTodoById(id);

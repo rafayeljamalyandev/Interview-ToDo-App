@@ -5,44 +5,49 @@ import { UserFactoryService } from './user-factory.service';
 import { User } from '../../core';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import {UserNotFoundException} from "../../core/exceptions/user-not-found-exception";
+import { UserNotFoundException } from '../../core/exceptions/user-not-found-exception';
 
 @Injectable()
 export class UserUseCases {
   constructor(
     private dataServices: IDataServices,
     private userFactoryService: UserFactoryService,
-  ) {
-  }
+  ) {}
 
-  getAllUsers(): Promise<User[]> {
-    return this.dataServices.user.getAll();
-  }
-
-  getUserById(id: any): Promise<User> {
-    return this.dataServices.user.get(id);
-  }
-
-  async register(createUserDto: CreateUserDto): Promise<void> {
+  async register(createUserDto: CreateUserDto): Promise<User> {
     const user = await this.userFactoryService.createNewUser(createUserDto);
-    this.dataServices.user.register(user);
+    return this.dataServices.user.register(user);
   }
 
   async login(userLoginDto: UserLoginDto): Promise<string> {
-    let user = await this.dataServices.user.login(userLoginDto.email, userLoginDto.password);
-    if (!user || !(await bcrypt.compare(userLoginDto.password, user.password))) {
-      throw new UserNotFoundException(userLoginDto.email);
+    let user = await this.dataServices.user.login(
+      userLoginDto.email,
+      userLoginDto.password,
+    );
+    if (
+      !user ||
+      !(await bcrypt.compare(userLoginDto.password, user.password))
+    ) {
+      throw new UserNotFoundException();
     }
     return jwt.sign({ userId: user.id }, 'some_secret_key');
   }
 
-  updateUser(
-    userId: string,
-    updateUserDto: UpdateUserDto,
-  ): Promise<User> {
-    const user = this.userFactoryService.updateUser(updateUserDto);
-    return this.dataServices.user.update(userId, user);
-  }
+  //-------------------------------------------------------------------------------------------
 
+  // updateUser(
+  //   userId: string,
+  //   updateUserDto: UpdateUserDto,
+  // ): Promise<User> {
+  //   const user = this.userFactoryService.updateUser(updateUserDto);
+  //   return this.dataServices.user.update(userId, user);
+  // }
 
+  // getAllUsers(): Promise<User[]> {
+  //   return this.dataServices.user.getAll();
+  // }
+
+  // getUserById(id: any): Promise<User> {
+  //   return this.dataServices.user.get(id);
+  // }
 }
