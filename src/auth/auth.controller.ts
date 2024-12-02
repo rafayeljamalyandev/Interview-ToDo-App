@@ -2,6 +2,7 @@ import { Controller, Post, Body, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dtos/auth.dto';
 import { Response } from 'express';
+import { CreateUserDto } from './dtos/user.dto';
 
 /* I'm using @Res() decorator to have customized consistence response for all requests
    for big projects we can use Interceptors to make it more Nest.JS friendly */
@@ -11,7 +12,7 @@ export class AuthController {
 
   @Post('register')
   async register(
-    @Body() body: AuthDto,
+    @Body() body: CreateUserDto,
     @Res({ passthrough: true }) response: Response,
   ) {
     const result = await this.authService.register(body);
