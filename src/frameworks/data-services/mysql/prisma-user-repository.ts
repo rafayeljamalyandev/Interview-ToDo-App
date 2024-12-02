@@ -11,7 +11,6 @@ export class PrismaUserRepository<T> implements IUserGenericRepository<T> {
   }
 
   async register(item: T): Promise<T> {
-
     return await this.prismaService.user.create({
       data: item as Prisma.UserCreateInput,
     }) as T;

@@ -11,17 +11,13 @@ export class TodoUseCases {
     private todoFactoryService: TodoFactoryService,
   ) {}
 
-  getAllTodos(): Promise<Todo[]> {
-    return this.dataServices.todo.getAll();
-  }
-
-  getTodoById(id: number): Promise<Todo> {
-    return this.dataServices.todo.get(id);
-  }
-
   createTodo(createTodoDto: CreateTodoDto): Promise<Todo> {
     const todo = this.todoFactoryService.createNewTodo(createTodoDto);
-    return this.dataServices.todo.create(todo);
+    return this.dataServices.todo.createTodo(todo);
+  }
+
+  listTodos( userId: number,): Promise<Todo[]> {
+    return this.dataServices.todo.listTodos(userId);
   }
 
   updateTodo(
@@ -32,8 +28,11 @@ export class TodoUseCases {
     return this.dataServices.todo.update(todoId, todo);
   }
 
-  getUserTodos( userId: number,): Promise<Todo[]> {
-    return this.dataServices.todo.getUserTodos(userId);
+  getAllTodos(): Promise<Todo[]> {
+    return this.dataServices.todo.getAll();
   }
 
+  getTodoById(id: number): Promise<Todo> {
+    return this.dataServices.todo.get(id);
+  }
 }
