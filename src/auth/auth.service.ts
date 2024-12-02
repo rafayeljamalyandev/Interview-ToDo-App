@@ -6,34 +6,35 @@ import {
   ServiceResponse,
   successResponse,
 } from 'src/shared/utils';
-import { PrismaService } from '../prisma/prisma.service';
 import { AuthDto } from './dtos/auth.dto';
+import { IUserRepository } from './models/repository.intf';
+import { User } from './models/model';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly prisma: PrismaService,
+    private readonly userRepository: IUserRepository,
     private readonly jwtService: JwtService,
   ) {}
 
-  /* User Info can have a separate DTO based on the properties we declare for user,
-     But here the user info is same as the info we need for Authentication, so I avoided defining a separate DTO */
   async register(userInfo: AuthDto): Promise<ServiceResponse> {
     try {
-      const user = await this.prisma.user.findUnique({
-        where: { email: userInfo.email },
-      });
-      if (user) {
+      const existingUser = await this.userRepository.getUserByEmail(
+        userInfo.email,
+      );
+      if (existingUser) {
         return errorResponse('Email is already used', HttpStatus.CONFLICT);
       }
 
       const hashedPassword = await bcrypt.hash(userInfo.password, 10);
-      const newUser = await this.prisma.user.create({
-        data: { email: userInfo.email, password: hashedPassword },
-      });
+      const user = new User(null, userInfo.email, hashedPassword);
+      const newUser = await this.userRepository.createUser(user);
 
       // Will return Status = 201 for created resource (user)
-      return successResponse(newUser, HttpStatus.CREATED);
+      return successResponse(
+        { id: newUser.id, email: newUser.email },
+        HttpStatus.CREATED,
+      );
     } catch (err) {
       return errorResponse(); // Will return Internal Server Error by default
     }
@@ -41,9 +42,7 @@ export class AuthService {
 
   async login(authInfo: AuthDto): Promise<ServiceResponse> {
     try {
-      const user = await this.prisma.user.findUnique({
-        where: { email: authInfo.email },
-      });
+      const user = await this.userRepository.getUserByEmail(authInfo.email);
       if (!user || !(await bcrypt.compare(authInfo.password, user.password))) {
         return errorResponse('Invalid Credentials', HttpStatus.UNAUTHORIZED);
       }
