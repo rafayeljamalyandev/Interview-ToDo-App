@@ -1,26 +1,29 @@
-import { Module } from '@nestjs/common';
+import {MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DataServicesModule } from './services/data-services/data-services.module';
 import { UserUseCasesModule } from './use-cases/user/user-use-cases.module';
 import { TodoUseCasesModule } from './use-cases/todo/todo-use-cases.module';
-import {  TodoController, UserController } from './controllers';
-import { APP_FILTER } from '@nestjs/core';
-import { GlobalExceptionFilter } from './frameworks/global-exeption/global-exception-filter';
+import {ApiModule} from "./controllers/module/api.module";
+import {JwtModule, JwtService} from "@nestjs/jwt";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // Makes ConfigModule available across the entire app
-      envFilePath: '.env', // Specify the path to your .env file
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET || 'defaultSecret',
+      signOptions: { expiresIn: '1d' },
     }),
     DataServicesModule,
     UserUseCasesModule,
     TodoUseCasesModule,
+    ApiModule,
   ],
-  controllers: [
-    TodoController,
-    UserController,
-  ],
-  providers: [],
+  controllers: [],
+  providers: [
+    JwtService,
+  ]
 })
-export class AppModule {}
+export class AppModule{}
