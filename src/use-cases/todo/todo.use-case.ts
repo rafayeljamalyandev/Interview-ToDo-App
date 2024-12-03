@@ -43,18 +43,18 @@ export class TodoUseCases {
   }
 
 
-  //---------------------------------------------------------------------------------------
+  //------------------------------ Not Implement ---------------------------------------
 
-  updateTodo(todoId: string, updateTodoDto: UpdateTodoDto): Promise<Todo> {
-    const todo = this.todoFactoryService.updateTodo(updateTodoDto);
-    return this.dataServices.todo.update(todoId, todo);
-  }
-
-  getAllTodos(): Promise<Todo[]> {
-    return this.dataServices.todo.getAll();
-  }
-
-  getTodoById(id: number): Promise<Todo> {
-    return this.dataServices.todo.get(id);
-  }
+  // updateTodo(todoId: string, updateTodoDto: UpdateTodoDto): Promise<Todo> {
+  //   const todo = this.todoFactoryService.updateTodo(updateTodoDto);
+  //   return this.dataServices.todo.update(todoId, todo);
+  // }
+  //
+  // getAllTodos(): Promise<Todo[]> {
+  //   return this.dataServices.todo.getAll();
+  // }
+  //
+  // getTodoById(id: number): Promise<Todo> {
+  //   return this.dataServices.todo.get(id);
+  // }
 }

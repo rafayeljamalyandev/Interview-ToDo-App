@@ -35,10 +35,9 @@ export class UserUseCases {
     return jwt.sign({data: data}
     , process.env.JWT_SECRET || 'defaultSecret'
     , { expiresIn: '1h' });
-    // return jwt.sign(, 'some_secret_key');
   }
 
-  //-------------------------------------------------------------------------------------------
+  //------------------------------ Not Implement ---------------------------------------
 
   // updateUser(
   //   userId: string,
