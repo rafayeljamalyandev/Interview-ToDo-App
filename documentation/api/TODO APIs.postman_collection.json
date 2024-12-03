@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "cf0f10b6-7812-4953-b65c-d3edb35f297b",
+		"name": "TODO APIs",
+		"description": "The TODO APIs collection stores individual to-do items for users. Each to-do item represents a task or goal that needs to be tracked or completed. It holds essential data for each task, including its title, and a unique identifier for each item.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28976755"
+	},
+	"item": [
+		{
+			"name": "AUTHENTICATION",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nancyasiuloka@gmail.com\",\r\n    \"password\": \"Password1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/auth/register",
+						"description": "This API endpoint allows a new user to register an account by providing their email address and password. Upon successful registration, the user is added to the system, and a response with user details is returned. If the registration details are invalid (e.g., email already exists, weak password), appropriate error messages will be provided."
+					},
+					"response": [
+						{
+							"name": "Sign Up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nancyasiuloka@gmail.com\",\r\n    \"password\": \"Password1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3000/auth/register"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "166"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a6-n4L8vNGViW//oP0x8ryOoMGSta8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 02 Dec 2024 10:31:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User registered successfully\",\n    \"user\": {\n        \"id\": 1,\n        \"email\": \"nancyasiuloka@gmail.com\",\n        \"password\": \"$2b$12$lyrZARKIbrkxb3Xn8x.bTuSoaBLn3uF/osrtLgjmhGXBl1gt57VI2\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nancyasiuloka@gmail.com\",\r\n    \"password\": \"Password1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/auth/login",
+						"description": "This API endpoint allows an existing user to log in by providing their email address and password. If the credentials are valid, a session or authentication token is returned, which the user can use for subsequent requests to protected routes. If the login fails (e.g., invalid credentials), an error message will be provided."
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nancyasiuloka@gmail.com\",\r\n    \"password\": \"Password1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3000/auth/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "178"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b2-TNhfe7/wW+Js6y5lSuN5UbVu5Hw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 02 Dec 2024 10:31:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTM1NDgzLCJleHAiOjE3MzMxMzkwODN9.CNP_4F0g59cgLsq6mnyAfXSy4UM6tFgxM5KHFoR-n9g\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The **Authentication Service** is responsible for managing user authentication and authorization within the application. It provides the functionality to register new users, log in existing users, and issue authentication tokens. These tokens are used for accessing protected resources and ensuring that only authorized users can perform certain actions.\n\nThe service handles user login, registration, password hashing, token generation, and validation. It ensures secure communication between the client and server by employing industry-standard practices for storing passwords, generating tokens, and authenticating users."
+		},
+		{
+			"name": "TODOS",
+			"item": [
+				{
+					"name": "Create Todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTM1NDgzLCJleHAiOjE3MzMxMzkwODN9.CNP_4F0g59cgLsq6mnyAfXSy4UM6tFgxM5KHFoR-n9g"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Fourth Todo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/todos",
+						"description": "This API endpoint allows the user to create a new to-do item by providing the title of the task. Once the to-do item is created, it will be saved in the database, and a response containing the to-do item details will be returned. If the provided data is incomplete or invalid, an error message will be returned."
+					},
+					"response": [
+						{
+							"name": "Create Todo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Fourth Todo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3000/todos"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "106"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6a-F6jUr73fCKqM6KcCArB53i3NOiQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 02 Dec 2024 10:32:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Todo created successfully\",\n    \"todo\": {\n        \"id\": 4,\n        \"title\": \"Fourth Todo\",\n        \"completed\": false,\n        \"userId\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Todos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMzMTM1NDgzLCJleHAiOjE3MzMxMzkwODN9.CNP_4F0g59cgLsq6mnyAfXSy4UM6tFgxM5KHFoR-n9g"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/todos",
+						"description": "This API endpoint allows the user to retrieve a list of all to-do items stored in the system. The response will include details such as the title of each to-do item."
+					},
+					"response": [
+						{
+							"name": "Create Todo Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3000/todos"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "297"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"129-gQUW2UL2SaFHL/C8KQI23n8CqUk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 02 Dec 2024 10:33:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Todos fetched successfully\",\n    \"data\": {\n        \"todos\": [\n            {\n                \"id\": 1,\n                \"title\": \"Fisrt Todo\",\n                \"completed\": false,\n                \"userId\": 1\n            },\n            {\n                \"id\": 2,\n                \"title\": \"Second Todo\",\n                \"completed\": false,\n                \"userId\": 1\n            },\n            {\n                \"id\": 3,\n                \"title\": \"Third Todo\",\n                \"completed\": false,\n                \"userId\": 1\n            },\n            {\n                \"id\": 4,\n                \"title\": \"Fourth Todo\",\n                \"completed\": false,\n                \"userId\": 1\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "The **Todos Service** is responsible for managing the creation and retrieval of to-do items within the application. It allows users to create personal tasks, view a list of tasks, and mark tasks as completed."
+		}
+	]
+}

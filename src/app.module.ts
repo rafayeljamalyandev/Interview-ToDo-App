@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from './auth.module';
-import { TodosModule } from './todos.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { TodosModule } from './modules/todos/todos.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
