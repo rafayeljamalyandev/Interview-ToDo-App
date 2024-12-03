@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { CreateTodoDto } from './dtos/todo.dto';
 import {
   errorResponse,
@@ -7,11 +7,13 @@ import {
 } from 'src/shared/utils';
 import { Todo } from './models/todo.model';
 import { ITodoRepository } from './models/todo.repository.intf';
+import { IUserRepository } from 'src/auth/models/repository.intf';
 
 @Injectable()
 export class TodoService {
   constructor(
     @Inject('ITodoRepository') private readonly todoRepository: ITodoRepository,
+    @Inject('IUserRepository') private readonly userRepository: IUserRepository,
   ) {}
 
   async createTodo(
@@ -19,6 +21,11 @@ export class TodoService {
     TodoInfo: CreateTodoDto,
   ): Promise<ServiceResponse> {
     try {
+      const user = await this.userRepository.getUserById(userId);
+      if (!user) {
+        return errorResponse('User Not Found!', HttpStatus.BAD_REQUEST);
+      }
+
       const todo = new Todo(null, TodoInfo.title, false, userId);
       const newTodo = await this.todoRepository.createTodo(todo);
 
