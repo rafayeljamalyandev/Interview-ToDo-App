@@ -2,7 +2,9 @@ import { Todo as TodoModel } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Todo } from '../models/todo.model';
 import { ITodoRepository } from '../models/todo.repository.intf';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class TodoRepository implements ITodoRepository {
   constructor(private readonly prisma: PrismaService) {}
 
@@ -33,6 +35,7 @@ export class TodoRepository implements ITodoRepository {
       return this.TodoFromDBModel(newTodo);
     } catch (err) {
       // Log Error
+      console.log('Error on creating Todo:', err);
       throw err;
     }
   }
@@ -47,6 +50,7 @@ export class TodoRepository implements ITodoRepository {
       return this.TodoArrayFromDBModel(todoList);
     } catch (err) {
       // Log Error
+      console.log('Error on getting Todo List:', err);
       throw err;
     }
   }
