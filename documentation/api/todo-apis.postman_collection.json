@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "27b58d81-eab7-4fd1-8642-58754b3b5506",
+		"name": "todo-apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2611032"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/api/user/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"John4\",\n    \"email\":\"John4@demo.com\",\n    \"password\": \"John444\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/user/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"John4@demo.com\",\n    \"password\": \"John444\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/todo/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6OCwiZW1haWwiOiJKb2huNEBkZW1vLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMTItMDNUMTI6MjM6MzIuOTU4WiJ9LCJpYXQiOjE3MzMyMjg2NTUsImV4cCI6MTczMzIzMjI1NX0.MB3_0H4bj_LzCXjwp8hXbvXjskhm4PCBl6uPfcfejKw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"sssddd\",\n    \"description\": \"ddssssdfsdfd\",\n    \"completed\":false,\n    \"userId\":8\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/todo/create",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"todo",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/todo/listTodos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6OCwiZW1haWwiOiJKb2huNEBkZW1vLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMTItMDNUMTI6MjM6MzIuOTU4WiJ9LCJpYXQiOjE3MzMyMjg2NTUsImV4cCI6MTczMzIzMjI1NX0.MB3_0H4bj_LzCXjwp8hXbvXjskhm4PCBl6uPfcfejKw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"sssddd\",\n    \"description\": \"ddssssdfsdfd\",\n    \"completed\":false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/todo/listTodos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"todo",
+						"listTodos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
