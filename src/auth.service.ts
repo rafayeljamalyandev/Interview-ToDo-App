@@ -6,10 +6,14 @@ import { PrismaService } from './prisma.service';
 import * as validator from 'validator';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private jwtService: JwtService,
+  ) {}
 
   // Helper method to validate password strength
   private validatePassword(password: string): void {
@@ -21,14 +25,13 @@ export class AuthService {
     }
   }
 
-  // Helper method to ensure JWT_SECRET exists
-  private getJwtSecret(): string {
-    const jwtSecret = process.env.JWT_SECRET;
-    if (!jwtSecret) {
-      throw new HttpException('JWT_SECRET is not defined in the environment variables', HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    return jwtSecret;
+   // Custom JWT generation helper function
+   private generateJwtToken(payload: any): string {
+    const secretKey = process.env.JWT_SECRET; 
+    const options = { expiresIn: '1h' }; 
+    return jwt.sign(payload, secretKey, options);
   }
+
 
   async register(email: string, password: string) {
     try {
@@ -43,15 +46,18 @@ export class AuthService {
       // Validate password strength
       this.validatePassword(password);
 
+      console.log('Registering email:', email);
+
       // Hash password and create user
       const hashedPassword = await bcrypt.hash(password, 10);
+      console.log('Generated hashed password:', hashedPassword);
       const user = await this.prisma.user.create({
         data: { email, password: hashedPassword },
       });
 
       return {
         message: 'User created successfully',
-        data: user,
+        data: { id: user.id, email: user.email },
       };
     } catch (error) {
       // Handle errors with consistent exceptions
@@ -72,12 +78,14 @@ export class AuthService {
       if (!user || !(await bcrypt.compare(password, user.password))) {
         throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
       }
+      console.log('Hash in DB:', user.password);
+      console.log('Password matches:', await bcrypt.compare(password, user.password));
 
-      // Generate JWT
-      const jwtSecret = this.getJwtSecret();
-      const token = jwt.sign({ userId: user.id }, jwtSecret, {
-        expiresIn: '1h',
-      });
+
+      // Generate JWT using jwtService
+      const payload = { userId: user.id };
+      const token = this.jwtService.sign(payload); 
+      console.log('JWT payload:', payload);
 
       return {
         message: 'Login successful',

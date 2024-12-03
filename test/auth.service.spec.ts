@@ -1,16 +1,22 @@
+require('dotenv').config({
+  path: require('path').resolve(__dirname, '../.env'),
+});
+
+import { JwtModule, JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { faker } from '@faker-js/faker';
-import { AuthService } from 'src/auth.service';
-import { PrismaService } from 'src/prisma.service';
+import { AuthService } from '../src/auth.service';
+import { PrismaService } from '../src/prisma.service';
 import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
 
 describe('AuthService', () => {
   let authService: AuthService;
   let prismaService: PrismaService;
+  let jwtService: JwtService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [JwtModule.register({ secret: process.env.JWT_SECRET })],
       providers: [
         AuthService,
         {
@@ -22,16 +28,21 @@ describe('AuthService', () => {
             },
           },
         },
+        {
+          provide: JwtService,
+          useValue: {
+            sign: jest.fn(() => 'mockJwtToken'),
+          },
+        },
       ],
     }).compile();
 
     authService = module.get<AuthService>(AuthService);
     prismaService = module.get<PrismaService>(PrismaService);
+    jwtService = module.get<JwtService>(JwtService);
 
-    jest
-      .spyOn(bcrypt, 'hash')
-      .mockImplementation(async () => 'mockHashedPassword');
-    jest.spyOn(jwt, 'sign').mockReturnValue('mockJwtToken');
+    jest.spyOn(bcrypt, 'hash').mockImplementation(async () => 'mockHashedPassword');
+    jest.spyOn(bcrypt, 'compare').mockResolvedValue(true);
   });
 
   afterEach(() => {
@@ -61,7 +72,7 @@ describe('AuthService', () => {
       });
       expect(result).toEqual({
         message: 'User created successfully',
-        data: { id: 1, email, password: 'mockHashedPassword' },
+        data: { id: 1, email },
       });
     });
 
@@ -91,25 +102,23 @@ describe('AuthService', () => {
     it('should successfully log in a user and return a JWT token', async () => {
       const email = faker.internet.email();
       const password = 'StrongPass1!';
-      const hashedPassword = 'mockHashedPassword';
+      const hashedPassword = await bcrypt.hash(password, 10);
 
       jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue({
         id: 1,
         email,
         password: hashedPassword,
       });
-      jest.spyOn(bcrypt, 'compare').mockResolvedValue(true);
 
       const result = await authService.login(email, password);
-
+      
       expect(prismaService.user.findUnique).toHaveBeenCalledWith({
         where: { email },
       });
       expect(bcrypt.compare).toHaveBeenCalledWith(password, hashedPassword);
-      expect(jwt.sign).toHaveBeenCalledWith(
+      expect(jwtService.sign).toHaveBeenCalledWith(
         { userId: 1 },
-        process.env.JWT_SECRET,
-        { expiresIn: '1h' },
+        { secret: process.env.JWT_SECRET, expiresIn: '1h' },
       );
       expect(result).toEqual({ message: 'Login successful', token: 'mockJwtToken' });
     });
@@ -129,22 +138,32 @@ describe('AuthService', () => {
       const email = faker.internet.email();
       const password = 'StrongPass1!';
       const hashedPassword = 'mockHashedPassword';
-
+    
       jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue({
         id: 1,
         email,
         password: hashedPassword,
       });
       jest.spyOn(bcrypt, 'compare').mockResolvedValue(true);
-
+    
+      // Save and delete JWT_SECRET
       const originalJwtSecret = process.env.JWT_SECRET;
       delete process.env.JWT_SECRET;
-
-      await expect(authService.login(email, password)).rejects.toThrow(
+    
+      // Reinitialize the module to reflect environment change
+      const module: TestingModule = await Test.createTestingModule({
+        imports: [JwtModule.register({ secret: process.env.JWT_SECRET })],
+        providers: [AuthService],
+      }).compile();
+    
+      const tempAuthService = module.get<AuthService>(AuthService);
+    
+      await expect(tempAuthService.login(email, password)).rejects.toThrow(
         'JWT_SECRET is not defined in the environment variables',
       );
-
+    
       process.env.JWT_SECRET = originalJwtSecret; // Restore for other tests
     });
+    
   });
 });

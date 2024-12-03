@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "06b7d852-026a-46c0-bc5b-8cac30d4a94d",
+		"name": "ToDo's API Documentation",
+		"description": "This is the complete documentation for all the endpoints optimized for the service ### **Setup Instructions**\n\n#### **1. Prerequisites**\nEnsure the following are installed on your machine:\n- [Node.js](https://nodejs.org/) (v14+ recommended)\n- [Postman](https://www.postman.com/) or another API testing tool\n- A package manager such as npm (comes with Node.js) or Yarn\n\n#### **2. Clone the Repository**\n```bash\ngit clone https://github.com/robertpaschal/todo-api.git\ncd todo-api\n```\n\n#### **3. Install Dependencies**\nRun the following command to install all required Node.js dependencies:\n```bash\nnpm install\n```\n\n#### **4. Configure Environment Variables**\nCreate a `.env` file in the root directory with the following content:\n```env\nPORT=3000\nJWT_SECRET=your_jwt_secret\nDATABASE_URL=your_database_url\n```\n\nReplace `your_jwt_secret` and `your_database_url` with appropriate values.\n\n#### **5. Start the Application**\nTo start the application, use one of the following commands:\n\n- **For Development** (with hot reloading):\n  ```bash\n  npm run start:dev\n  ```\n\n- **For Production**:\n  ```bash\n  npm run start:prod\n  ```\n\nThe server will start on `http://localhost:3000`.\n\n#### **6. Testing the Endpoints**\n- Open Postman or any API client.\n- Import the provided `ToDo's API Documentation` collection.\n- Send requests to the available endpoints.\n\n---\n\n### **Available Endpoints**\n\n#### **Base URL**\n`http://localhost:3000`\n\n#### **Endpoints**\n\n- **Home Route**\n  - **GET /**\n  - Response: `\"Hello World!\"`\n\n- **User Registration**\n  - **POST /auth/register**\n  - Body:\n    ```json\n    {\n      \"email\": \"user@example.com\",\n      \"password\": \"StrongPassword123!\"\n    }\n    ```\n  - Response:\n    ```json\n    {\n      \"message\": \"User created successfully\",\n      \"data\": { \"id\": 2, \"email\": \"user@example.com\" }\n    }\n    ```\n\n- **User Login**\n  - **POST /auth/login**\n  - Body:\n    ```json\n    {\n      \"email\": \"user@example.com\",\n      \"password\": \"StrongPassword123!\"\n    }\n    ```\n  - Response:\n    ```json\n    {\n      \"message\": \"Login successful\",\n      \"token\": \"your_jwt_token\"\n    }\n    ```\n\n- **Create Todo**\n  - **POST /todos**\n  - Headers: `Authorization: Bearer <your_jwt_token>`\n  - Body:\n    ```json\n    {\n      \"title\": \"New Todo\",\n      \"description\": \"This is a new todo item\"\n    }\n    ```\n  - Response:\n    ```json\n    {\n      \"id\": 2,\n      \"title\": \"New Todo\",\n      \"completed\": false,\n      \"userId\": 2\n    }\n    ```\n\n- **Get Todos**\n  - **GET /todos**\n  - Headers: `Authorization: Bearer <your_jwt_token>`\n  - Response:\n    ```json\n    [\n      {\n        \"id\": 2,\n        \"title\": \"New Todo\",\n        \"completed\": false,\n        \"userId\": 2\n      }\n    ]\n    ```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39817118"
+	},
+	"item": [
+		{
+			"name": "Home Route",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				}
+			},
+			"response": [
+                "Hello World!"
+            ]
+		},
+		{
+			"name": "User Registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"StrongPassword123!\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": [
+                {"message":"User created successfully","data":{"id":2,"email":"user@example.com"}}
+            ]
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"StrongPassword123!\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+                {"message":"Login successful","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMzI0NTg5OSwiZXhwIjoxNzMzMjQ5NDk5fQ.ilc18gMt2LA5-lBETInqnHBpDN00MW0Z6kMHHTTofCM"}
+            ]
+		},
+		{
+			"name": "Create Todo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMzI0NTg5OSwiZXhwIjoxNzMzMjQ5NDk5fQ.ilc18gMt2LA5-lBETInqnHBpDN00MW0Z6kMHHTTofCM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"New Todo\",\r\n  \"description\": \"This is a new todo item\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/todos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": [
+                {"id":2,"title":"New Todo","completed":false,"userId":2}
+            ]
+		},
+		{
+			"name": "Get Todos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczMzI0NTg5OSwiZXhwIjoxNzMzMjQ5NDk5fQ.ilc18gMt2LA5-lBETInqnHBpDN00MW0Z6kMHHTTofCM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/todos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": [
+                [{"id":2,"title":"New Todo","completed":false,"userId":2}]
+            ]
+		}
+	]
+}

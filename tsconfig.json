@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "allowJs": true,
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -11,6 +12,7 @@
     "outDir": "./dist",
     "rootDir": "./",
     "baseUrl": "./", 
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "paths": {
       "src/*": ["src/*"] // Mapping "src/*" to the actual folder
     },
@@ -21,5 +23,6 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": ["src/**/*"],
 }
