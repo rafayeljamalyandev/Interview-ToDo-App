@@ -24,10 +24,7 @@ export class UserUseCases {
       userLoginDto.email,
       userLoginDto.password,
     );
-    if (
-      !user ||
-      !(await bcrypt.compare(userLoginDto.password, user.password))
-    ) {
+    if (!user || !(await bcrypt.compare(userLoginDto.password, user.password))) {
       throw new UserNotFoundException();
     }
     const data= {
