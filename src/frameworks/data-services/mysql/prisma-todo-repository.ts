@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ITodoGenericRepository } from '../../../core/abstracts/todo-repository.abstract';
 import { PrismaService } from './prisma.service';
 import { Prisma } from '@prisma/client';
@@ -31,10 +31,10 @@ export class PrismaTodoRepository<T> implements ITodoGenericRepository<T> {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         // Handle unique constraint violations or other known Prisma errors
         if (error.code === 'P2002') {
-          throw new BadRequestException('A similar todo already exists');
+          // throw new BadRequestException('A similar todo already exists');
         }
       }
-      throw error;
+      // throw new BadRequestException('DB error occurred');
     }
   }
 

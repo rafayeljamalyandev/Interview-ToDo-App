@@ -7,13 +7,13 @@ import {ApiOperation, ApiResponse} from "@nestjs/swagger";
 export class TodoController {
   constructor(private todoUseCases: TodoUseCases) {}
 
-  @Post()
+  @Post('create')
   @ApiOperation({ summary: 'Create a new todo' })
   @ApiResponse({ status: 201, description: 'User created successfully' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   async createTodo(@Body() body: CreateTodoDto, @Req() req) {
     try {
-      let result = this.todoUseCases.createTodo(body);
+      let result =await this.todoUseCases.createTodo(body);
       return {
         status: 200,
         result,
@@ -23,10 +23,10 @@ export class TodoController {
     }
   }
 
-  @Get()
+  @Get('listTodos')
   async listTodos(@Req() req) {
     try {
-      let result = this.todoUseCases.listTodos(req.user.id);
+      let result = await this.todoUseCases.listTodos(req.user.id);
       return {
         status: 200,
         result,

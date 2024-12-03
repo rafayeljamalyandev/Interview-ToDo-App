@@ -4,24 +4,33 @@ import { UserUseCases } from '../../../use-cases/user/user.use-case';
 
 @Controller('api/user')
 export class UserController {
-  constructor(private userUseCases: UserUseCases) {}
+  constructor(private userUseCases: UserUseCases) {
+  }
 
   @Post('/register')
   async register(@Body() userDto: CreateUserDto) {
-    let result= await this.userUseCases.register(userDto);
-    return {
-      status: 200,
-      result:result
-    };
+    try {
+      let result = await this.userUseCases.register(userDto);
+      return {
+        status: 200,
+        result: result,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Post('/login')
   login(@Body() userLoginDto: UserLoginDto) {
-    let token = this.userUseCases.login(userLoginDto);
-    return {
-      status: 200,
-      result:token,
-    };
+    try {
+      let token = this.userUseCases.login(userLoginDto);
+      return {
+        status: 200,
+        result: token,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 
   //--------------------------------------------------------------------------------------------

@@ -4,6 +4,8 @@ import { DataServicesModule } from './services/data-services/data-services.modul
 import { UserUseCasesModule } from './use-cases/user/user-use-cases.module';
 import { TodoUseCasesModule } from './use-cases/todo/todo-use-cases.module';
 import {  TodoController, UserController } from './controllers';
+import { APP_FILTER } from '@nestjs/core';
+import { GlobalExceptionFilter } from './frameworks/global-exeption/global-exception-filter';
 
 @Module({
   imports: [

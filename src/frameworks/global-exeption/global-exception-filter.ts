@@ -1,25 +1,54 @@
-import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
+import {
+    ExceptionFilter,
+    Catch,
+    ArgumentsHost,
+    HttpException,
+    HttpStatus,
+    Logger,
+    Injectable
+} from '@nestjs/common';
 import { Request, Response } from 'express';
 
-@Catch()
+@Catch()  // Important: Catch ALL exceptions
+@Injectable()
 export class GlobalExceptionFilter implements ExceptionFilter {
+    private readonly logger = new Logger(GlobalExceptionFilter.name);
+
     catch(exception: unknown, host: ArgumentsHost) {
+
         const ctx = host.switchToHttp();
         const response = ctx.getResponse<Response>();
         const request = ctx.getRequest<Request>();
 
         const status =
-            exception instanceof HttpException
-                ? exception.getStatus()
-                : HttpStatus.INTERNAL_SERVER_ERROR;
+          exception instanceof HttpException
+            ? exception.getStatus()
+            : HttpStatus.INTERNAL_SERVER_ERROR;
 
         const errorResponse = {
             statusCode: status,
             timestamp: new Date().toISOString(),
             path: request.url,
-            message: exception instanceof Error ? exception.message : 'Unexpected error occurred'
+            message: this.getErrorMessage(exception)
         };
 
-        response.status(status).json(errorResponse);
+        this.logger.error(
+          `Error in ${request.method} ${request.url}`,
+          JSON.stringify(errorResponse)
+        );
+
+        response
+          .status(status)
+          .json(errorResponse);
+    }
+
+    private getErrorMessage(exception: unknown): string {
+        if (exception instanceof HttpException) {
+            return exception.message;
+        }
+        if (exception instanceof Error) {
+            return exception.message;
+        }
+        return 'Unexpected error occurred';
     }
 }

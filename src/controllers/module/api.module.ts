@@ -23,11 +23,16 @@ export class ApiModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ApiMiddleware)
-      .exclude({ path: 'api/user', method: RequestMethod.POST })
-      .forRoutes(
-          { path: 'api/user', method: RequestMethod.GET },
-          { path: 'api/todo', method: RequestMethod.POST },
-          { path: 'api/todo', method: RequestMethod.GET },
-      );
+      .forRoutes('*');
+      // .forRoutes({ path: 'api/todo/*', method: RequestMethod.ALL });
+
+    // .exclude(
+      //   { path: 'api/user/register', method: RequestMethod.POST }, // Exclude specific routes
+      //   { path: 'api/user/login', method: RequestMethod.POST }
+      // )
+      // .forRoutes(
+      //   { path: 'api/todo/create', method: RequestMethod.POST }, // Attach middleware to these routes
+      //   { path: 'api/todo/listTodos', method: RequestMethod.GET }
+      // );
   }
 }
