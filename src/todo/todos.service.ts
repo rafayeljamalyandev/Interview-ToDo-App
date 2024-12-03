@@ -9,7 +9,7 @@ import { Todo } from './models/todo.model';
 import { ITodoRepository } from './models/todo.repository.intf';
 
 @Injectable()
-export class TodosService {
+export class TodoService {
   constructor(
     @Inject('ITodoRepository') private readonly todoRepository: ITodoRepository,
   ) {}

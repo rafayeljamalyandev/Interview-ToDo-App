@@ -7,7 +7,7 @@ import {
   UseGuards,
   Res,
 } from '@nestjs/common';
-import { TodosService } from './todos.service';
+import { TodoService } from './todos.service';
 import { JwtGuard } from 'src/shared/middlewares/auth.guard';
 import { CreateTodoDto } from './dtos/todo.dto';
 import { Response } from 'express';
@@ -17,7 +17,7 @@ import { Response } from 'express';
 @Controller('todos')
 @UseGuards(JwtGuard)
 export class TodosController {
-  constructor(private todosService: TodosService) {}
+  constructor(private todosService: TodoService) {}
 
   @Post()
   async create(
