@@ -11,5 +11,6 @@ import { UserRepository } from './repositories/user.repository';
     { provide: 'IUserRepository', useClass: UserRepository },
   ],
   controllers: [AuthController],
+  exports: [{ provide: 'IUserRepository', useClass: UserRepository }],
 })
 export class AuthModule {}
