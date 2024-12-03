@@ -1,8 +1,4 @@
 export interface IJwtUser {
-  id?: number;
-  version: string;
-  device: string;
-  key: string;
-  post: {};
+  userId: number;
   iat: number;
 }

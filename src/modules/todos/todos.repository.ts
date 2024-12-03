@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../config/db/prisma.service';
 import { Todo } from '@prisma/client';
+import { ITodosCreate } from './v1/interface/todos.interface';
 
 @Injectable()
 export class TodosRepository {
@@ -10,5 +11,9 @@ export class TodosRepository {
     return this.prisma.todo.findUnique({
       where: { id },
     });
+  }
+
+  async create(data: ITodosCreate): Promise<Todo> {
+    return this.prisma.todo.create({ data });
   }
 }

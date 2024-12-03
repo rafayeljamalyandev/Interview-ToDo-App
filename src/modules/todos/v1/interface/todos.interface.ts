@@ -1,5 +1,4 @@
-export class ResCreateTodoDTO {
-  id: number;
+export class ITodosCreate {
   title: string;
   userId: number;
   completed: boolean;
