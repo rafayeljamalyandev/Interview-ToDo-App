@@ -23,7 +23,7 @@ export class PrismaUserRepository<T> implements IUserGenericRepository<T> {
     return user as T;
   }
 
-  //-----------------------------------------------------------------------------
+  //------------------------------ Not Implement ---------------------------------------
 
   getAll(): Promise<T[]> {
     throw new Error('Method not implemented.');

@@ -52,7 +52,7 @@ export class PrismaTodoRepository<T> implements ITodoGenericRepository<T> {
     });
   }
 
-  //-------------------------------------------------------------------------------------
+  //------------------------------ Not Implement ---------------------------------------
 
   getAll(): Promise<T[]> {
     throw new Error('Method not implemented.');

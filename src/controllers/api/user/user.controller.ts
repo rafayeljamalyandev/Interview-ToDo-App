@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, Put } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Put, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto, UpdateUserDto, UserLoginDto } from '../../../core/dtos';
 import { UserUseCases } from '../../../use-cases/user/user.use-case';
 
@@ -21,9 +21,9 @@ export class UserController {
   }
 
   @Post('/login')
-  login(@Body() userLoginDto: UserLoginDto) {
+  async login(@Body() userLoginDto: UserLoginDto) {
     try {
-      let token = this.userUseCases.login(userLoginDto);
+      let token =await  this.userUseCases.login(userLoginDto);
       return {
         status: 200,
         result: token,
