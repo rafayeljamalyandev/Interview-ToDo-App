@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionFilter } from './shared/middlewares/exception.filter';
 import { ConfigService } from '@nestjs/config';
 import { CustomValidationPipe } from './shared/middlewares/validation.pipe';
