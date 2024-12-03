@@ -196,7 +196,7 @@ describe('TodoService', () => {
       mockPrismaService.todo.findMany.mockRejectedValue(new Error('Database error'));
 
       await expect(service.searchTodos(1, 'Test')).rejects.toThrow(
-        InternalServerErrorException,
+        new Error('Error searching for todos')
       );
     });
   });
@@ -215,7 +215,7 @@ describe('TodoService', () => {
 
       await expect(
         service.updateTodo(1, { title: 'Update' }, 1),
-      ).rejects.toThrow(InternalServerErrorException);
+      ).rejects.toThrow(new ForbiddenException('Todo not found or access denied'));
     });
   });
 });

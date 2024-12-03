@@ -1,0 +1,227 @@
+{
+	"info": {
+		"_postman_id": "aabd026c-855f-46b3-855e-736d8bd5e128",
+		"name": "Todo-Mangement-API",
+		"description": "\n```markdown\n# Todo Application API\n\n## Authentication\n\n### POST /auth/register\n\n**Description**: Registers a new user.\n\n**Request Body**:\n```json\n{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}\n```\n\n**Response**:\n- **200 OK**: User registered successfully\n- **400 Bad Request**: Invalid input\n\n---\n\n### POST /auth/login\n\n**Description**: Logs in a user and returns a JWT token.\n\n**Request Body**:\n```json\n{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}\n```\n\n**Response**:\n- **200 OK**: JWT token returned\n- **401 Unauthorized**: Invalid credentials\n\n---\n\n## Todo Management\n\n### POST /todos/create\n\n**Description**: Creates a new todo.\n\n**Headers**:\n- **Authorization**: `Bearer <jwt-token>`\n\n**Request Body**:\n```json\n{\n  \"title\": \"New Todo\",\n  \"completed\": false\n}\n```\n\n**Response**:\n- **201 Created**: Todo created successfully\n- **400 Bad Request**: Invalid todo data\n\n---\n\n### GET /todos/list\n\n**Description**: Retrieves all todos for the logged-in user.\n\n**Headers**:\n- **Authorization**: `Bearer <jwt-token>`\n\n**Response**:\n- **200 OK**: List of todos\n- **401 Unauthorized**: Missing or invalid JWT token\n```\n\nLet me know if you need further help with customizing your documentation!",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21784369"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"quazeemastics@gmail.com\",\n    \"password\":\"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/auth/login",
+				"description": "This endpoint allows a new user to register by providing an email and a password. Upon successful registration, a user is created in the database.\n\n**Response**:\n\n- **201 Created**: Successfully registered the user.\n    \n- **400 Bad Request**: The provided input is invalid."
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"quazeemastic@gmail.com\",\n    \"password\":\"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/auth/login",
+				"description": "This endpoint allows a registered user to login by providing their email and password. Upon successful login, a JWT token is returned, which can be used to authenticate subsequent requests.\n\n**Response**:\n\n- **200 OK**: Successfully logged in and returned a JWT token.\n    \n- **401 Unauthorized**: Invalid credentials, authentication failed."
+			},
+			"response": []
+		},
+		{
+			"name": "create-todo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"hi\",\n  \"completed\": false\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/todos/create",
+				"description": "This endpoint allows the authenticated user to create a new todo. The title and completion status must be provided. This request requires a valid JWT token in the `Authorization` header.\n\n**Headers**:\n\n- **Authorization**: `Bearer`\n    \n- **Response**:\n    \n    - **201 Created**: The todo has been created successfully.\n        \n    - **400 Bad Request**: Invalid todo data, missing or incorrect fields.\n        \n    - **401 Unauthorized**: Missing or invalid JWT token."
+			},
+			"response": []
+		},
+		{
+			"name": "list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/todos/list",
+				"description": "This endpoint retrieves a list of all todos belonging to the authenticated user. A valid JWT token is required to access this endpoint.\n\n**Headers**:\n\n- **Authorization**: `Bearer`\n    \n\n**Response**:\n\n- **200 OK**: Successfully retrieved the list of todos.\n    \n- **401 Unauthorized**: Missing or invalid JWT token."
+			},
+			"response": []
+		},
+		{
+			"name": "find",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/todos/find/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"todos",
+						"find",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				},
+				"description": "This endpoint retrieves a specific todo by its ID for the authenticated user. The user must provide the todo's ID in the request path. A valid JWT token is required.\n\n**Headers**:\n\n- **Authorization**: `Bearer`\n    \n\n**Request Path**:\n\n- `:id`: The ID of the todo to retrieve.\n    \n\n**Response**:\n\n- **200 OK**: Successfully retrieved the specified todo.\n    \n- **401 Unauthorized**: Missing or invalid JWT token.\n    \n- **404 Not Found**: Todo with the provided ID not found."
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"Finish  report\",\n    \"completed\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/todos/update/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"todos",
+						"update",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				},
+				"description": "This endpoint allows the authenticated user to update an existing todo by its ID. The user must provide the todo's ID in the request path and the updated information in the body. A valid JWT token is required.\n\n**Headers**:\n\n- **Authorization**: `Bearer`\n    \n\n**Request Path**:\n\n- `:id`: The ID of the todo to update.\n    \n\n**Response**:\n\n- **200 OK**: The todo has been successfully updated.\n    \n- **401 Unauthorized**: Missing or invalid JWT token.\n    \n- **404 Not Found**: Todo with the provided ID not found."
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/todos/delete/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"todos",
+						"delete",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				},
+				"description": "This endpoint allows the authenticated user to delete a todo by its ID. A valid JWT token is required to delete the todo.\n\n**Headers**:\n\n- **Authorization**: `Bearer`\n    \n\n**Request Path**:\n\n- `:id`: The ID of the todo to delete.\n    \n\n**Response**:\n\n- **200 OK**: The todo has been successfully deleted.\n    \n- **401 Unauthorized**: Missing or invalid JWT token.\n    \n- **404 Not Found**: Todo with the provided ID not found."
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/todos/search/?query=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"todos",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": ""
+						}
+					]
+				},
+				"description": "This endpoint allows the authenticated user to search for todos by a query string. The query string is used to search the title of todos. If no todos match the query, an empty array is returned.\n\n**Headers**:\n\n- **Authorization**: `Bearer`\n    \n\n**Request Query**:\n\n- `query`: The search string used to filter todos by title.\n    \n\n**Response**:\n\n- **200 OK**: A list of todos that match the search query.\n    \n- **400 Bad Request**: The `query` parameter is required.\n    \n- **401 Unauthorized**: Missing or invalid JWT token."
+			},
+			"response": []
+		}
+	]
+}
