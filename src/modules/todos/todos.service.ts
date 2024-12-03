@@ -6,7 +6,7 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { PrismaService } from '../../prisma.service';
-import { CreateTodo, ListTodos } from '../../types/todo.types';
+import { CreateTodo, ListTodos, UpdateTodos } from '../../types/todo.types';
 
 @Injectable()
 export class TodosService {
@@ -60,5 +60,53 @@ export class TodosService {
       if (error instanceof HttpException) throw error;
       throw new InternalServerErrorException('Todo failed');
     }
+  }
+
+  async updateTodo(data: UpdateTodos, todoId: number) {
+    try {
+      const todo = await this.prismaService.todo.findUnique({
+        where: { id: todoId },
+      });
+
+      if (!todo) {
+        throw new ConflictException('Not found');
+      }
+
+      const update = await this.prismaService.todo.update({
+        where: { id: todoId },
+        data: {
+          title: data.title,
+          completed: data.completed,
+        },
+      });
+
+      return {
+        message: 'Updated Successfully',
+        update,
+      };
+    } catch (error) {
+      this.logger.error('Error updating Todos', error.stack);
+      if (error instanceof HttpException) throw error;
+      throw new InternalServerErrorException('Todo update failed');
+    }
+  }
+
+  async deleteTodo(todoId: number) {
+    const todo = await this.prismaService.todo.findUnique({
+      where: { id: todoId },
+    });
+
+    if (!todo) {
+      throw new ConflictException('Not found');
+    }
+
+    const data = await this.prismaService.todo.delete({
+      where: { id: todoId },
+    });
+
+    return {
+      message: 'Deleted Successfully',
+      data,
+    };
   }
 }
