@@ -931,6 +931,80 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"meta\": {\n        \"code\": 200,\n        \"msg\": \"success\"\n    },\n    \"data\": [\n        {\n            \"id\": 5,\n            \"title\": \"todo 3\",\n            \"completed\": false,\n            \"userId\": 5\n        },\n        {\n            \"id\": 4,\n            \"title\": \"todo 3\",\n            \"completed\": false,\n            \"userId\": 5\n        },\n        {\n            \"id\": 3,\n            \"title\": \"todo 2\",\n            \"completed\": false,\n            \"userId\": 5\n        },\n        {\n            \"id\": 2,\n            \"title\": \"todo 1\",\n            \"completed\": false,\n            \"userId\": 5\n        },\n        {\n            \"id\": 1,\n            \"title\": \"asddd\",\n            \"completed\": false,\n            \"userId\": 5\n        }\n    ],\n    \"pagination\": {\n        \"page\": 1,\n        \"total\": 5,\n        \"total_page\": 1\n    }\n}"
+						},
+						{
+							"name": "Sucess, empty data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{auth-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{localUrl}}/v1/todos?page=1&limit=10",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"v1",
+										"todos"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "if empty, will use default value on pagination DTO"
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "if empty, will use default value on pagination DTO"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "96"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"60-eyyc18o9Su/P+FnVHgd+C/1/UsQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 03 Dec 2024 06:21:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 200,\n        \"msg\": \"success\"\n    },\n    \"data\": [],\n    \"pagination\": {\n        \"page\": 1,\n        \"total\": 0,\n        \"total_page\": 0\n    }\n}"
 						}
 					]
 				}
