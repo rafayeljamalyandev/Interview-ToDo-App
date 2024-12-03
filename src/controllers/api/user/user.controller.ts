@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Post, Body, Put, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto, UpdateUserDto, UserLoginDto } from '../../../core/dtos';
 import { UserUseCases } from '../../../use-cases/user/user.use-case';
+import {ApiOperation, ApiResponse} from "@nestjs/swagger";
 
 @Controller('api/user')
 export class UserController {
@@ -8,6 +9,9 @@ export class UserController {
   }
 
   @Post('/register')
+  @ApiOperation({ summary: 'Create a new user' })
+  @ApiResponse({ status: 201, description: 'User created successfully' })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
   async register(@Body() userDto: CreateUserDto) {
     try {
       let result = await this.userUseCases.register(userDto);
@@ -21,6 +25,9 @@ export class UserController {
   }
 
   @Post('/login')
+  @ApiOperation({ summary: 'login a user' })
+  @ApiResponse({ status: 200, description: 'get a user token' })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
   async login(@Body() userLoginDto: UserLoginDto) {
     try {
       let token =await  this.userUseCases.login(userLoginDto);
@@ -33,7 +40,8 @@ export class UserController {
     }
   }
 
-  //--------------------------------------------------------------------------------------------
+  //------------------------------ Not Implement -------------------------------------------------------------
+
   // @Put(':id')
   // updateUser(
   //   @Param('id') userId: string,

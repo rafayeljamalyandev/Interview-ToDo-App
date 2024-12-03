@@ -9,7 +9,7 @@ export class TodoController {
 
   @Post('create')
   @ApiOperation({ summary: 'Create a new todo' })
-  @ApiResponse({ status: 201, description: 'User created successfully' })
+  @ApiResponse({ status: 201, description: 'todo created successfully' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   async createTodo(@Body() body: CreateTodoDto, @Req() req) {
     try {
@@ -24,6 +24,8 @@ export class TodoController {
   }
 
   @Get('listTodos')
+  @ApiResponse({ status: 200, description: 'here are a list of todos' })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
   async listTodos(@Req() req) {
     try {
       let result = await this.todoUseCases.listTodos(req.user.id);
@@ -36,7 +38,7 @@ export class TodoController {
     }
   }
 
-  //---------------------------------------------------------------------------------------------
+  //------------------------------ Not Implement -------------------------------------------------------------
 
   // @Get()
   // async getAllTodos() {

@@ -31,10 +31,10 @@ export class PrismaTodoRepository<T> implements ITodoGenericRepository<T> {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         // Handle unique constraint violations or other known Prisma errors
         if (error.code === 'P2002') {
-          // throw new BadRequestException('A similar todo already exists');
+          throw new BadRequestException('A similar todo already exists');
         }
       }
-      // throw new BadRequestException('DB error occurred');
+      throw new BadRequestException('DB error occurred');
     }
   }
 

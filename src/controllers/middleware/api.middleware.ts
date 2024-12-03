@@ -1,11 +1,12 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
+import { HttpException, HttpStatus, Injectable, NestMiddleware } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
+import { NextFunction, Request, Response } from 'express'
 
 @Injectable()
 export class ApiMiddleware implements NestMiddleware {
     use(req: Request, res: Response, next: NextFunction) {
-        console.log('Middleware executed for:', req.path);
-        next(); // Ensure the request continues to the next handler
+        console.log('Middleware triggered!');
+        next();
     }
 }
 
