@@ -2,7 +2,9 @@ import { User as UserModel } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from '../models/model';
 import { IUserRepository } from '../models/repository.intf';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class UserRepository implements IUserRepository {
   constructor(private readonly prisma: PrismaService) {}
 
@@ -20,6 +22,7 @@ export class UserRepository implements IUserRepository {
       return this.UserFromDBModel(newUser);
     } catch (err) {
       // Log Error
+      console.log('Error on creating User:', err);
       throw err;
     }
   }
@@ -32,6 +35,7 @@ export class UserRepository implements IUserRepository {
       return this.UserFromDBModel(user);
     } catch (err) {
       // Log Error
+      console.log('Error on getting User info by id:', err);
       throw err;
     }
   }
@@ -45,6 +49,7 @@ export class UserRepository implements IUserRepository {
       return this.UserFromDBModel(user);
     } catch (err) {
       // Log Error
+      console.log('Error on getting User info by email:', err);
       throw err;
     }
   }
