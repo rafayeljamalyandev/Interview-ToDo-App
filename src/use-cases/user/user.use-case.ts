@@ -30,7 +30,15 @@ export class UserUseCases {
     ) {
       throw new UserNotFoundException();
     }
-    return jwt.sign({ userId: user.id }, 'some_secret_key');
+    const data= {
+      userId: user.id,
+      email : user.email,
+      createdAt :user.createdAt
+    };
+    return jwt.sign({data: data}
+    , process.env.JWT_SECRET || 'defaultSecret'
+    , { expiresIn: '1h' });
+    // return jwt.sign(, 'some_secret_key');
   }
 
   //-------------------------------------------------------------------------------------------

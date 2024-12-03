@@ -15,6 +15,7 @@ export class UserController {
   async register(@Body() userDto: CreateUserDto) {
     try {
       let result = await this.userUseCases.register(userDto);
+      delete result?.password;
       return {
         status: 200,
         result: result,

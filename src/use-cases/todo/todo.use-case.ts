@@ -23,8 +23,8 @@ export class TodoUseCases {
       throw new TodoTitleCannotBeEmpty();
     }
     const todo = this.todoFactoryService.createNewTodo(createTodoDto);
-    const userExists = await this.dataServices.todo.checkUserExist(todo.userId);
-    if (!userExists) {
+    const userNotExists = await this.dataServices.todo.checkUserExist(todo.userId);
+    if (userNotExists) {
       throw new UserNotFoundException();
     }
     return this.dataServices.todo.createTodo(todo);
@@ -36,7 +36,7 @@ export class TodoUseCases {
       throw new UserIdIsRequiredException();
     }
     const userExists = await this.dataServices.todo.checkUserExist(userId);
-    if (!userExists) {
+    if (userExists) {
       throw new UserNotFoundException();
     }
     return this.dataServices.todo.listTodos(userId, skip,take);

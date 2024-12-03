@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsDate, IsNumber } from 'class-validator';
+import {IsString, IsNotEmpty, IsDate, IsNumber, IsEmail, Length} from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -24,3 +24,14 @@ export class CreateTodoDto {
 }
 
 export class UpdateTodoDto extends PartialType(CreateTodoDto) {}
+
+export class ListTodosDto {
+
+  @IsNumber()
+  skip: number=0;
+
+  @IsNumber()
+  take: number=10;
+
+
+}

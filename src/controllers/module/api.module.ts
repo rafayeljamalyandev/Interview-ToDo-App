@@ -17,12 +17,7 @@ import {PrismaService} from "../../frameworks/data-services/mysql/prisma.service
 import {TodoFactoryService} from "../../use-cases/todo/todo-factory.service";
 
 @Module({
-  imports: [
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || 'defaultSecret',
-      signOptions: { expiresIn: '1d' },
-    }),
-  ],
+  imports: [],
   controllers: [UserController, TodoController],
   providers: [
       UserUseCases,TodoUseCases,PrismaService,UserFactoryService,TodoFactoryService,

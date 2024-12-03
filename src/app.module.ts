@@ -12,10 +12,6 @@ import {JwtModule, JwtService} from "@nestjs/jwt";
       isGlobal: true,
       envFilePath: '.env',
     }),
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || 'defaultSecret',
-      signOptions: { expiresIn: '1d' },
-    }),
     DataServicesModule,
     UserUseCasesModule,
     TodoUseCasesModule,
