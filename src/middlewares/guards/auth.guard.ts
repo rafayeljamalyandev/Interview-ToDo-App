@@ -5,8 +5,8 @@ import {
   InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { IJwtUser } from 'src/common/interfaces/jwt.interface';
-import { JWTVerify } from 'src/lib/jwt/jwt';
+import { IJwtUser } from '../../common/interfaces/jwt.interface';
+import { JWTVerify } from '../../lib/jwt/jwt';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
