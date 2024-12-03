@@ -1,21 +1,49 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  HttpCode,
+  HttpStatus,
+  UseGuards,
+  Res,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
+import { Tokens } from './types';
+import { RtGuard } from '../../../common/guards';
+import { GetCurrentUserId, Public } from '../../../common/decorators';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @Post('register')
-  async register(@Body() registerUserDto: RegisterUserDto) {
-    const { email, password } = registerUserDto;
-    return this.authService.register(email, password);
+  @HttpCode(HttpStatus.CREATED)
+  async register(@Body() registerUserDto: RegisterUserDto): Promise<Tokens> {
+    return this.authService.register(registerUserDto);
   }
 
+  @Public()
   @Post('login')
-  async login(@Body() loginUserDto: LoginUserDto) {
-    const { email, password } = loginUserDto;
-    return this.authService.login(email, password);
+  @HttpCode(HttpStatus.OK)
+  async login(
+    @Res({ passthrough: true }) resp,
+    @Body() loginUserDto: LoginUserDto,
+  ): Promise<Tokens> {
+    return this.authService.login(loginUserDto, resp);
+  }
+
+  @Public()
+  @UseGuards(RtGuard)
+  @Post('refresh')
+  @HttpCode(HttpStatus.OK)
+  async refreshTokens(
+    @Res({ passthrough: true }) resp,
+    @GetCurrentUserId() userId: number,
+  ) {
+    console.log({ userId });
+    return this.authService.refreshTokens(userId, resp);
   }
 }
