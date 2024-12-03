@@ -8,10 +8,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { TodosServiceV1 } from './todos.service-v1';
-import { AuthGuard } from 'src/middlewares/guards/auth.guard';
+import { AuthGuard } from '../../../middlewares/guards/auth.guard';
 import { ReqCreateTodoDTO, ReqGetListTodoDTO } from './dto/request.dto';
-import { CurrentUser } from 'src/common/decorators/current-user.decorator';
-import { CurrentUserEnum } from 'src/common/enums';
+import { CurrentUser } from '../../../common/decorators/current-user.decorator';
+import { CurrentUserEnum } from '../../../common/enums/user.enum';
 
 @Controller({ path: 'todos', version: '1' })
 export class TodosControllerV1 {

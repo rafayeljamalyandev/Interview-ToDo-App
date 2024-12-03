@@ -1,6 +1,5 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
-import { PaginationDTO } from 'src/common/dto';
-import { paginationDefault } from 'src/common/helpers/pagination';
+import { PaginationDTO } from '../../.././../common/dto/pagination.dto';
 
 export class ReqCreateTodoDTO {
   @IsNotEmpty()
@@ -15,9 +14,9 @@ export class ReqCreateTodoDTO {
 export class ReqGetListTodoDTO extends PaginationDTO {
   @IsOptional()
   @IsString()
-  title: string;
+  title?: string;
 
   @IsOptional()
   @IsNumber()
-  userId: number;
+  userId?: number;
 }
