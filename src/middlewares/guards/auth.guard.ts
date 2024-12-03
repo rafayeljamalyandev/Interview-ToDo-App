@@ -21,8 +21,7 @@ export class AuthGuard implements CanActivate {
     try {
       // Validate JWT Token
       const decoded: IJwtUser = await JWTVerify(token);
-
-      request.body.userId = decoded.userId;
+      request.user = decoded;
 
       return true;
     } catch (err) {

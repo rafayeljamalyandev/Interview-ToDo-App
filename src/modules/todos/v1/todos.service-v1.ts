@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../../config/db/prisma.service';
-import { ReqCreateTodoDTO } from './dto/request.dto';
+import { ReqCreateTodoDTO, ReqGetListTodoDTO } from './dto/request.dto';
 import { ResCreateTodoDTO } from './dto/response.dto';
 import { TodosRepository } from '../todos.repository';
 
@@ -17,7 +16,9 @@ export class TodosServiceV1 {
     return await this.todosRepository.create(newTodo);
   }
 
-  // async listTodos(userId: number) {
-  //   return this.prisma.todo.findMany({ where: { userId } });
-  // }
+  async listTodos(
+    props: ReqGetListTodoDTO,
+  ): Promise<{ data: ReqGetListTodoDTO[]; count: number }> {
+    return await this.todosRepository.findMany(props);
+  }
 }
