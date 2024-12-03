@@ -98,4 +98,41 @@ With Abstractions we will define a contract between the use cases and the framew
 Basically, the contracts are the function signatures of the desired services.
 For example, the Database service needs to provide 
 a “create” function that create a User object as a parameter and returns a promise.
- 
+
+![diagram](./doc-images/abstract.webp)
+
+## Controllers and Presenters
+Our controller, presenters, and gateways are intermediate layers. You can think of them as an adapter that glues our use cases to the outside world and back the other way.
+
+**Controllers**
+- Receive the user input — some kind of DTO.
+- Validate user input-sanitization.
+- Convert the user input into a model that the use case expects.  
+- Call the use case and pass it the new model.
+
+-**The controller is an adapter and we don’t want any business logic here, only data formatting logic.**
+```bash
+...
+export class CreateUserDto {
+  @ApiProperty({ example: 'Jimi', description: 'name of user' })
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @ApiProperty({ example: 'email@demo.com', description: 'the email address' })
+  @IsString()
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  @ApiProperty({ example: 'password', description: 'the password of the user' })
+  @IsString()
+  @IsNotEmpty()
+  @Length(6, 30)
+  password: string;
+}
+...
+```
+
+## Frameworks
+this layer includes all our specific implementations, such as the database, monitoring, billing, error handling, etc.
