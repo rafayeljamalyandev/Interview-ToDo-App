@@ -22,7 +22,7 @@ export class TodoService {
       const todo = new Todo(null, TodoInfo.title, false, userId);
       const newTodo = await this.todoRepository.createTodo(todo);
 
-      return successResponse(newTodo);
+      return successResponse(newTodo, 201);
     } catch (err) {
       return errorResponse(); // Will return Internal Server Error by default
     }
