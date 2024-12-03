@@ -1,11 +1,13 @@
 import {
   CanActivate,
   ExecutionContext,
+  Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
 
+@Injectable()
 export class JwtGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
@@ -15,6 +17,7 @@ export class JwtGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const authHeader = request.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      console.log(`Auth Failed: ${authHeader}`);
       throw new UnauthorizedException('Authentication Failed');
     }
 
@@ -25,6 +28,7 @@ export class JwtGuard implements CanActivate {
 
       return true;
     } catch (err) {
+      console.log(`Token Verification Failed: ${token}\n`, err);
       throw new UnauthorizedException('Authentication Failed');
     }
   }
