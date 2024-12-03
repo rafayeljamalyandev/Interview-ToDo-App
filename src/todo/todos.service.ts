@@ -11,7 +11,7 @@ import { ITodoRepository } from './models/todo.repository.intf';
 @Injectable()
 export class TodosService {
   constructor(
-    @Inject('IUserRepository') private readonly todoRepository: ITodoRepository,
+    @Inject('ITodoRepository') private readonly todoRepository: ITodoRepository,
   ) {}
 
   async createTodo(
