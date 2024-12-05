@@ -1,36 +1,21 @@
-# TODO App with NestJS, Prisma, and MySQL
+# ToDo Backend Project
 
-This project is a simple TODO application built with **NestJS**, **Prisma**, and **MySQL**. It includes basic authentication and a TODO management system.
+This project is a simple TODO application built with **NestJS**, **Prisma**, and **MySQL**. It provides basic functionality for managing TODO items and user authentication.
 
-## Task for Candidates
+## Project Structure
 
-You are tasked with **reviewing, improving, and fixing this codebase**. This application intentionally contains poor practices, missing features, and bugs. Your goal is to refactor and enhance the project while following modern backend development best practices.
+The project is organized into the following directories:
 
----
-
-## Requirements
-
-Your submission must include the following:
-
-### 1. **Code Improvements**
-- Refactor the codebase to follow clean architecture and modular design principles.
-- Ensure proper error handling (e.g., try-catch blocks, meaningful HTTP response codes).
-- Implement middleware for authentication and JWT validation.
-- Use DTOs and validation pipes for incoming requests.
-- Avoid hardcoded values (e.g., `.env` for sensitive information).
-- Improve database queries to handle edge cases and optimize performance.
-- Add meaningful comments where necessary.
-
-### 2. **Unit and Integration Tests**
-- Write unit tests for critical services (e.g., authentication, TODO management).
-- Write at least one integration test to validate the API behavior end-to-end.
-
-### 3. **Documentation**
-- Create documentation for the APIs using Postman and put the exported collection as json in the `documentation/api` folder.
-- Provide instructions for setting up and running the project locally.
-
-### 4. **Edge Cases**
-- Handle edge cases such as invalid user input, empty TODO lists, invalid authentication tokens, etc.
+- `dist/`: Compiled files (generated after build).
+- `documentation/`: API documentation and related files.
+- `docker-compose.yml`: Docker configuration file to run MySQL.
+- `node_modules/`: Installed npm packages.
+- `prisma/`: Prisma database schema and migration files.
+- `src/`: Source code of the application.
+- `test/`: End-to-end tests for the application.
+- `Makefile`: Utility for running various development tasks.
+- `package.json`: Project dependencies and scripts.
+- `tsconfig.json`: TypeScript configuration for the project.
 
 ---
 
@@ -38,78 +23,158 @@ Your submission must include the following:
 
 ### Prerequisites
 
-Ensure you have the following tools installed:
+Before running the project, ensure you have the following tools installed:
+
 - **Node.js** (v16 or higher)
-- **MySQL** (local instance or Docker)
-- **npm** 
-- **Git**
+- **Docker** and **Docker Compose**
+- **npm**
 
-### Installation
+### 1. Setting Up MySQL Using Docker
 
-1. Clone the repository:
+To run MySQL in a Docker container, follow these steps:
+
+1. **Modify `docker-compose.yml` to set the appropriate MySQL credentials**:
+   
+   Open the `docker-compose.yml` file and ensure that the `MYSQL_ROOT_PASSWORD`, `MYSQL_DATABASE`, `MYSQL_USER`, and `MYSQL_PASSWORD` values are set correctly. Here's an example:
+
+   ```yaml
+   version: '3.8'
+
+   services:
+     db:
+       image: mysql:8.0
+       container_name: mysql_todo
+       restart: always
+       ports:
+         - "3306:3306"
+       environment:
+         MYSQL_ROOT_PASSWORD: rootpassword
+         MYSQL_DATABASE: todoapp
+         MYSQL_USER: user
+         MYSQL_PASSWORD: userpassword
+       volumes:
+         - db_data:/var/lib/mysql
+
+   volumes:
+     db_data:
+   ```
+
+2. **Start MySQL using Docker Compose**:
+   
+   Once the configuration is set, run the following command to start the MySQL container:
+
+   ```bash
+   docker-compose -d up
+   ```
+
+   This will start MySQL and expose it on `localhost:3306`.
+
+---
+
+### 2. Configuring Environment Variables
+
+Create a `.env` file in the root directory of the project with the following content:
+
 ```bash
-git clone https://github.com/rafayeljamalyandev/Interview-ToDo-App.git
+DATABASE_URL="mysql://root:rootpassword@localhost:3306/todoapp"
+JWT_SECRET="some_secret_key"
+PORT=3000
 ```
 
-2.	Install dependencies:
+Make sure to replace the database connection information with your actual settings.
+
+---
+
+### 3. Installing Dependencies
+
+To install the required dependencies for the project, run the following command:
+
 ```bash
 npm install
 ```
 
-3.	Set up the .env file:
-```bash
-DATABASE_URL="mysql://root:password@localhost:3306/todoapp"
-JWT_SECRET="some_secret_key"
-```
+---
 
-4.	Apply Prisma migrations:
+### 4. Running Migrations
+
+Prisma is used for database management. To apply the migrations and set up the database schema, run:
 
 ```bash
 npx prisma migrate dev
 ```
 
+---
 
-5.	Start the application:
+### 5. Running the Application
+
+Once the database is set up and dependencies are installed, you can start the application with:
+
 ```bash
 npm run start:dev
 ```
 
-## Submission Format
+This will start the NestJS server, and the application will be accessible at `http://localhost:3000`.
 
-1.	Create a Fork
-•	Fork this repository to your personal GitHub account.
-2.	Create a Feature Branch
-•	Create a new branch for your work:
+---
+
+## Makefile Commands
+
+The project includes a `Makefile` for common development tasks. Here are some key commands:
+
+- **Run migrations**:
+
+   This will run Prisma migrations to update the database schema:
+
+   ```bash
+   make migrations
+   ```
+
+- **Test database connection**:
+
+   This command pulls the database schema to ensure it is connected properly:
+
+   ```bash
+   make test_db_connect
+   ```
+
+- **Run end-to-end tests**:
+
+   To run the tests, use the following command:
+
+   ```bash
+   make run_tests
+   ```
+
+---
+
+## Running Tests
+
+The project uses end-to-end tests to validate the application. To run the tests, use:
 
 ```bash
-git checkout -b candidate-improvements
+npm run test:e2e
 ```
 
-3.	Make Changes
-  •	Commit your improvements and push them to your branch.
-4.	Open a Merge Request (MR)
-  •	Submit a pull request (PR) from your feature branch to the main branch of this repository.
-5.	Provide a Summary
-  •	In your MR description, include:
-  •	A brief overview of the changes.
-  •	Key improvements and fixes.
-  •	Instructions for testing your changes.
+Or you can use the Makefile:
 
-## Evaluation Criteria
+```bash
+make run_tests
+```
 
-Your submission will be evaluated based on the following:
-1.	Code quality and readability.
-2.	Adherence to best practices.
-3.	Error handling and edge case management.
-4.	Test coverage and quality of tests.
-5.	Proper use of Prisma and database handling.
-6.	Documentation and clarity of instructions.
+---
 
-Tips
-•	Focus on making the code modular and maintainable.
-•	Write meaningful commit messages.
-•	Don’t overcomplicate — aim for clarity and maintainability.
+## Folder Structure Explanation
+
+- **src/**: Contains the source code of the application. This includes modules, controllers, services, and configuration for the application.
+- **prisma/**: Holds the Prisma schema (`schema.prisma`) and migration files.
+- **test/**: Contains the end-to-end tests for the application.
+
+---
+
+## Conclusion
+
+This project is set up with basic functionality for a TODO application using **NestJS**, **Prisma**, and **MySQL**. The provided instructions allow you to set up MySQL in a Docker container, configure environment variables, install dependencies, apply database migrations, and run the application.
+
+Make sure to follow the steps above to get started with the project, and feel free to modify or improve the code to better suit your needs.
 
 Good luck! 🚀
-
-Let me know if you need further customization for the `README.md` file or assistance!
