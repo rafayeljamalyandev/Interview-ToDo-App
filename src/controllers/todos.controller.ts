@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Req } from '@nestjs/common';
-import { TodosService } from './todos.service';
+import { TodosService } from 'src/services/todos.service';
 
 @Controller('todos')
 export class TodosController {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { TodosService } from './todos.service';
-import { TodosController } from './todos.controller';
+import { TodosController } from 'src/controllers/todos.controller';
+import { TodosService } from 'src/services/todos.service';
 
 @Module({
   providers: [TodosService],
