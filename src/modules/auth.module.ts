@@ -14,6 +14,6 @@ export class AuthModule {
   constructor(private readonly configService: ConfigService) {}
 
   public getJwtSecret(): (string | null) {
-    return this.configService.get<string>("JWT_SECRET") ?? null;
+    return this.configService.get<string>("JWT_SECRET") || null;
   }
 }

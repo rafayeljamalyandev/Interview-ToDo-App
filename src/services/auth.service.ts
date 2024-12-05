@@ -2,10 +2,15 @@ import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { PrismaService } from './prisma.service';
+import { generateJwtKey } from 'src/utils/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly configService: ConfigService
+  ) {}
 
   async register(email: string, password: string) {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -19,6 +24,7 @@ export class AuthService {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       throw new Error('Invalid credentials');
     }
-    return jwt.sign({ userId: user.id }, 'some_secret_key');
+    
+    return generateJwtKey({ userId: user.id }) 
   }
 }
