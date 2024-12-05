@@ -1,10 +1,18 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from './modules/app.module';
+import { ConfigService } from '@nestjs/config';
+import { AuthMiddleware } from './middleware/auth.middleware';
 
-async function bootstrap() {
+async function main() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000, () => {
-    console.log('Server started listening on port 3000');
+  const configService = app.get(ConfigService);
+  const port = configService.get<number>('PORT') || 3000;
+
+  app.use('/todos', AuthMiddleware);
+
+  await app.listen(port, () => {
+    console.log(`Application is running on: http://localhost:${port}`);
   });
 }
-bootstrap();
+
+main();
