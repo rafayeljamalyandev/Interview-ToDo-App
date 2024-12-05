@@ -4,3 +4,5 @@ migrations:
 	npx prisma migrate dev
 test_db_connect:
 	npx prisma db pull
+run_tests:
+	npm run test:e2e
