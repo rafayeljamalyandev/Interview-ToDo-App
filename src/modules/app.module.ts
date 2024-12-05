@@ -9,6 +9,7 @@ import { TodosModule } from './todos.module';
     TodosModule,
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: '.env',
     }),
   ],
   providers: [],
