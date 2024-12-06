@@ -1,0 +1,8 @@
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  refreshToken String? @db.VarChar(512)
+
+  todos    Todo[] @relation("User Todos")
+}

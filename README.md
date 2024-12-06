@@ -1,115 +1,85 @@
-# TODO App with NestJS, Prisma, and MySQL
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-This project is a simple TODO application built with **NestJS**, **Prisma**, and **MySQL**. It includes basic authentication and a TODO management system.
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-## Task for Candidates
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-You are tasked with **reviewing, improving, and fixing this codebase**. This application intentionally contains poor practices, missing features, and bugs. Your goal is to refactor and enhance the project while following modern backend development best practices.
+## Description
 
----
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Requirements
-
-Your submission must include the following:
-
-### 1. **Code Improvements**
-- Refactor the codebase to follow clean architecture and modular design principles.
-- Ensure proper error handling (e.g., try-catch blocks, meaningful HTTP response codes).
-- Implement middleware for authentication and JWT validation.
-- Use DTOs and validation pipes for incoming requests.
-- Avoid hardcoded values (e.g., `.env` for sensitive information).
-- Improve database queries to handle edge cases and optimize performance.
-- Add meaningful comments where necessary.
-
-### 2. **Unit and Integration Tests**
-- Write unit tests for critical services (e.g., authentication, TODO management).
-- Write at least one integration test to validate the API behavior end-to-end.
-
-### 3. **Documentation**
-- Create documentation for the APIs using Postman and put the exported collection as json in the `documentation/api` folder.
-- Provide instructions for setting up and running the project locally.
-
-### 4. **Edge Cases**
-- Handle edge cases such as invalid user input, empty TODO lists, invalid authentication tokens, etc.
-
----
-
-## Getting Started
-
-### Prerequisites
-
-Ensure you have the following tools installed:
-- **Node.js** (v16 or higher)
-- **MySQL** (local instance or Docker)
-- **npm** 
-- **Git**
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/rafayeljamalyandev/Interview-ToDo-App.git
-```
-
-2.	Install dependencies:
-```bash
-npm install
-```
-
-3.	Set up the .env file:
-```bash
-DATABASE_URL="mysql://root:password@localhost:3306/todoapp"
-JWT_SECRET="some_secret_key"
-```
-
-4.	Apply Prisma migrations:
+## Project setup
 
 ```bash
-npx prisma migrate dev
+$ pnpm install
 ```
 
-
-5.	Start the application:
-```bash
-npm run start:dev
-```
-
-## Submission Format
-
-1.	Create a Fork
-•	Fork this repository to your personal GitHub account.
-2.	Create a Feature Branch
-•	Create a new branch for your work:
+## Compile and run the project
 
 ```bash
-git checkout -b candidate-improvements
+# development
+$ pnpm run start
+
+# watch mode
+$ pnpm run start:dev
+
+# production mode
+$ pnpm run start:prod
 ```
 
-3.	Make Changes
-  •	Commit your improvements and push them to your branch.
-4.	Open a Merge Request (MR)
-  •	Submit a pull request (PR) from your feature branch to the main branch of this repository.
-5.	Provide a Summary
-  •	In your MR description, include:
-  •	A brief overview of the changes.
-  •	Key improvements and fixes.
-  •	Instructions for testing your changes.
+## Run tests
 
-## Evaluation Criteria
+```bash
+# unit tests
+$ pnpm run test
 
-Your submission will be evaluated based on the following:
-1.	Code quality and readability.
-2.	Adherence to best practices.
-3.	Error handling and edge case management.
-4.	Test coverage and quality of tests.
-5.	Proper use of Prisma and database handling.
-6.	Documentation and clarity of instructions.
+# e2e tests
+$ pnpm run test:e2e
 
-Tips
-•	Focus on making the code modular and maintainable.
-•	Write meaningful commit messages.
-•	Don’t overcomplicate — aim for clarity and maintainability.
+# test coverage
+$ pnpm run test:cov
+```
 
-Good luck! 🚀
+## Resources
 
-Let me know if you need further customization for the `README.md` file or assistance!
+Check out a few resources that may come in handy when working with NestJS:
+
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+
+## Support
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
