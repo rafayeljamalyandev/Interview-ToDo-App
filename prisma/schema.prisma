@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -11,6 +12,8 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
+
+  @@map("user")
 }
 
 model Todo {
@@ -18,4 +21,6 @@ model Todo {
   title     String
   completed Boolean @default(false)
   userId    Int
+
+  @@map("todo")
 }
