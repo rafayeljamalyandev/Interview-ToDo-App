@@ -1,8 +1,9 @@
 {
-  "name": "myproject",
-  "version": "0.0.1",
+  "name": "todo-app",
+  "version": "1.0.0",
   "description": "",
   "author": "",
+  "contributors": ["shayan-ziaarabshahi"],
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
