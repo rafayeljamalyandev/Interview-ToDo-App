@@ -5,14 +5,15 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly configService: ConfigService,
+    private jwtService: JwtService,
   ) {}
 
   async register(email: string, password: string) {
@@ -33,8 +34,12 @@ export class AuthService {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    return jwt.sign({ userId: user.id }, this.configService.get('JWT_SECRET'), {
-      expiresIn: '1d',
-    });
+    return this.jwtService.signAsync(
+      { userId: user.id },
+      {
+        secret: this.configService.get('JWT_SECRET'),
+        expiresIn: '1d',
+      },
+    );
   }
 }

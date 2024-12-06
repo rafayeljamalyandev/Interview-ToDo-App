@@ -4,9 +4,15 @@ import {
   Body,
   HttpException,
   HttpStatus,
+  HttpCode,
+  UseGuards,
+  Get,
 } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { AuthDto } from 'src/auth/auth.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { GetUser } from 'src/common/decorators/get-user.decorator';
+import { UserPayload } from 'src/common/types';
 
 @Controller('auth')
 export class AuthController {
@@ -28,6 +34,7 @@ export class AuthController {
     }
   }
 
+  @HttpCode(HttpStatus.OK)
   @Post('login')
   async login(@Body() body: AuthDto) {
     try {
@@ -44,5 +51,11 @@ export class AuthController {
         error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  getProfile(@GetUser() user: UserPayload) {
+    return user;
   }
 }
