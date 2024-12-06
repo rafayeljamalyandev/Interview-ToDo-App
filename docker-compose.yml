@@ -1,0 +1,35 @@
+services:
+  app:
+    build: .
+    container_name: nestjs-app
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=mysql://root:password@mysql-db:3306/todoapp
+      - JWT_SECRET=some_secret_key
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: todoapp
+      MYSQL_USER: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
