@@ -1,115 +1,73 @@
-# TODO App with NestJS, Prisma, and MySQL
+# Todos App
 
-This project is a simple TODO application built with **NestJS**, **Prisma**, and **MySQL**. It includes basic authentication and a TODO management system.
+This is a NestJS application with a microservices' architecture.
 
-## Task for Candidates
+## Development Environment
 
-You are tasked with **reviewing, improving, and fixing this codebase**. This application intentionally contains poor practices, missing features, and bugs. Your goal is to refactor and enhance the project while following modern backend development best practices.
+- **OS**: Windows 11
+- **Node.js**: 22.12
+- **pnpm**: 9.9
 
----
+## Installation
 
-## Requirements
+1. Install dependencies:
+    ```sh
+    pnpm i
+    ```
 
-Your submission must include the following:
+2. Adjust `DATABASE_URL` username and password to your credentials in the environment configuration.
 
-### 1. **Code Improvements**
-- Refactor the codebase to follow clean architecture and modular design principles.
-- Ensure proper error handling (e.g., try-catch blocks, meaningful HTTP response codes).
-- Implement middleware for authentication and JWT validation.
-- Use DTOs and validation pipes for incoming requests.
-- Avoid hardcoded values (e.g., `.env` for sensitive information).
-- Improve database queries to handle edge cases and optimize performance.
-- Add meaningful comments where necessary.
+3. Generate Prisma client:
+    ```sh
+    pnpm run prisma-generate
+    ```
 
-### 2. **Unit and Integration Tests**
-- Write unit tests for critical services (e.g., authentication, TODO management).
-- Write at least one integration test to validate the API behavior end-to-end.
+4. Run database migrations:
+    ```sh
+    pnpm run migration
+    ```
 
-### 3. **Documentation**
-- Create documentation for the APIs using Postman and put the exported collection as json in the `documentation/api` folder.
-- Provide instructions for setting up and running the project locally.
+## Running Services
 
-### 4. **Edge Cases**
-- Handle edge cases such as invalid user input, empty TODO lists, invalid authentication tokens, etc.
+- Start the main service in development mode:
+    ```sh
+    pnpm run start:dev
+    ```
 
----
+- Start the auth service in development mode:
+    ```sh
+    pnpm run start:dev auth
+    ```
 
-## Getting Started
+## Testing
 
-### Prerequisites
+- Run unit tests:
+    ```sh
+    pnpm run test
+    ```
 
-Ensure you have the following tools installed:
-- **Node.js** (v16 or higher)
-- **MySQL** (local instance or Docker)
-- **npm** 
-- **Git**
+- Run end-to-end tests for the auth service:
+    ```sh
+    pnpm run test:e2e:auth
+    ```
 
-### Installation
+- Run end-to-end tests for the todo service:
+    ```sh
+    pnpm run test:e2e:todo
+    ```
 
-1. Clone the repository:
-```bash
-git clone https://github.com/rafayeljamalyandev/Interview-ToDo-App.git
-```
+## Project Structure
 
-2.	Install dependencies:
-```bash
-npm install
-```
+- **Services**: Located in the `apps` directory.
+  - `auth`
+  - `todo`
 
-3.	Set up the .env file:
-```bash
-DATABASE_URL="mysql://root:password@localhost:3306/todoapp"
-JWT_SECRET="some_secret_key"
-```
+- **Common Services**: Located in the `libs` directory.
+  - `prisma`
+  - `logger`
+  - Other shared utilities and files
 
-4.	Apply Prisma migrations:
+## Notes
 
-```bash
-npx prisma migrate dev
-```
-
-
-5.	Start the application:
-```bash
-npm run start:dev
-```
-
-## Submission Format
-
-1.	Create a Fork
-•	Fork this repository to your personal GitHub account.
-2.	Create a Feature Branch
-•	Create a new branch for your work:
-
-```bash
-git checkout -b candidate-improvements
-```
-
-3.	Make Changes
-  •	Commit your improvements and push them to your branch.
-4.	Open a Merge Request (MR)
-  •	Submit a pull request (PR) from your feature branch to the main branch of this repository.
-5.	Provide a Summary
-  •	In your MR description, include:
-  •	A brief overview of the changes.
-  •	Key improvements and fixes.
-  •	Instructions for testing your changes.
-
-## Evaluation Criteria
-
-Your submission will be evaluated based on the following:
-1.	Code quality and readability.
-2.	Adherence to best practices.
-3.	Error handling and edge case management.
-4.	Test coverage and quality of tests.
-5.	Proper use of Prisma and database handling.
-6.	Documentation and clarity of instructions.
-
-Tips
-•	Focus on making the code modular and maintainable.
-•	Write meaningful commit messages.
-•	Don’t overcomplicate — aim for clarity and maintainability.
-
-Good luck! 🚀
-
-Let me know if you need further customization for the `README.md` file or assistance!
+- Ensure all environment variables are properly set for each service.
+- Refer to the NestJS documentation for more details on microservices setup and configuration.
